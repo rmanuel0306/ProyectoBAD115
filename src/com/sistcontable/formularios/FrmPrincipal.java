@@ -45,7 +45,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
         pnlContenedor = new javax.swing.JPanel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
-        jMenuItem1 = new javax.swing.JMenuItem();
+        itmNuevo = new javax.swing.JMenuItem();
         jMenuItem2 = new javax.swing.JMenuItem();
         jMenuItem3 = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
@@ -102,14 +102,14 @@ public class FrmPrincipal extends javax.swing.JFrame {
         jMenu1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/sistcontable/imagenes/cash.png"))); // NOI18N
         jMenu1.setText("Transacciones");
 
-        jMenuItem1.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_N, java.awt.event.InputEvent.CTRL_MASK));
-        jMenuItem1.setText("Nuevo");
-        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+        itmNuevo.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_N, java.awt.event.InputEvent.CTRL_MASK));
+        itmNuevo.setText("Nuevo");
+        itmNuevo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem1ActionPerformed(evt);
+                itmNuevoActionPerformed(evt);
             }
         });
-        jMenu1.add(jMenuItem1);
+        jMenu1.add(itmNuevo);
 
         jMenuItem2.setText("Compra");
         jMenu1.add(jMenuItem2);
@@ -205,10 +205,10 @@ public class FrmPrincipal extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+    private void itmNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itmNuevoActionPerformed
         // TODO add your handling code here:
-        
-    }//GEN-LAST:event_jMenuItem1ActionPerformed
+        JOptionPane.showMessageDialog(null, "Ha seleccionado la opcion Nuevo");
+    }//GEN-LAST:event_itmNuevoActionPerformed
 
     private void itmTab1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itmTab1ActionPerformed
         // TODO add your handling code here:
@@ -226,6 +226,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JMenuItem itmNuevo;
     private javax.swing.JMenuItem itmTab1;
     private javax.swing.JMenuItem itmTab2;
     private javax.swing.JLabel jLabel1;
@@ -237,7 +238,6 @@ public class FrmPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu5;
     private javax.swing.JMenu jMenu6;
     private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem10;
     private javax.swing.JMenuItem jMenuItem11;
     private javax.swing.JMenuItem jMenuItem2;
