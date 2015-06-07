@@ -1,5 +1,5 @@
 package com.sistcontable.model;
-// Generated 06-07-2015 11:50:17 AM by Hibernate Tools 4.3.1
+// Generated 06-07-2015 01:25:15 PM by Hibernate Tools 4.3.1
 
 
 import java.math.BigDecimal;

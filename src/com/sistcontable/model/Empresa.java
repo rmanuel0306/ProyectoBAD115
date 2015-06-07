@@ -1,5 +1,5 @@
 package com.sistcontable.model;
-// Generated 06-07-2015 11:50:17 AM by Hibernate Tools 4.3.1
+// Generated 06-07-2015 01:25:15 PM by Hibernate Tools 4.3.1
 
 
 
@@ -12,8 +12,6 @@ public class Empresa  implements java.io.Serializable {
      private String enombre;
      private String edireccion;
      private Integer telefono;
-     private String propietario;
-     private String contador;
 
     public Empresa() {
     }
@@ -22,12 +20,10 @@ public class Empresa  implements java.io.Serializable {
     public Empresa(String enombre) {
         this.enombre = enombre;
     }
-    public Empresa(String enombre, String edireccion, Integer telefono, String propietario, String contador) {
+    public Empresa(String enombre, String edireccion, Integer telefono) {
        this.enombre = enombre;
        this.edireccion = edireccion;
        this.telefono = telefono;
-       this.propietario = propietario;
-       this.contador = contador;
     }
    
     public String getEnombre() {
@@ -50,20 +46,6 @@ public class Empresa  implements java.io.Serializable {
     
     public void setTelefono(Integer telefono) {
         this.telefono = telefono;
-    }
-    public String getPropietario() {
-        return this.propietario;
-    }
-    
-    public void setPropietario(String propietario) {
-        this.propietario = propietario;
-    }
-    public String getContador() {
-        return this.contador;
-    }
-    
-    public void setContador(String contador) {
-        this.contador = contador;
     }
 
 
