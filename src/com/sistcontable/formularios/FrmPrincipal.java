@@ -159,7 +159,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
         jMenu5.setText("Opciones");
         jMenuBar1.add(jMenu5);
 
-        jMenu6.setText("Prueba");
+        jMenu6.setText("Persona");
 
         itmTab1.setText("Tab1");
         itmTab1.addActionListener(new java.awt.event.ActionListener() {

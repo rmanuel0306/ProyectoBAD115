@@ -1,0 +1,57 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 06-07-2015 11:50:18 AM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="com.sistcontable.model.Persona" table="PERSONA" schema="BAD115" optimistic-lock="version">
+        <id name="idPersona" type="big_decimal">
+            <column name="ID_PERSONA" precision="22" scale="0" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="municipio" class="com.sistcontable.model.Municipio" fetch="select">
+            <column name="ID_MUNIC" precision="22" scale="0" />
+        </many-to-one>
+        <property name="primerNombre" type="string">
+            <column name="PRIMER_NOMBRE" length="25" />
+        </property>
+        <property name="segundoNombre" type="string">
+            <column name="SEGUNDO_NOMBRE" length="25" />
+        </property>
+        <property name="primerApellido" type="string">
+            <column name="PRIMER_APELLIDO" length="25" />
+        </property>
+        <property name="segundoApellido" type="string">
+            <column name="SEGUNDO_APELLIDO" length="25" />
+        </property>
+        <property name="cargo" type="string">
+            <column name="CARGO" length="25" />
+        </property>
+        <property name="sexo" type="string">
+            <column name="SEXO" length="1" />
+        </property>
+        <property name="fechaNac" type="date">
+            <column name="FECHA_NAC" length="7" />
+        </property>
+        <property name="dui" type="string">
+            <column name="DUI" length="9" />
+        </property>
+        <property name="EMail" type="string">
+            <column name="E_MAIL" length="30" />
+        </property>
+        <property name="direccion" type="string">
+            <column name="DIRECCION" length="100" />
+        </property>
+        <set name="telefonos" table="TELEFONO" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="ID_PERSONA" precision="22" scale="0" />
+            </key>
+            <one-to-many class="com.sistcontable.model.Telefono" />
+        </set>
+        <set name="usuarios" table="USUARIO" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="ID_PERSONA" precision="22" scale="0" />
+            </key>
+            <one-to-many class="com.sistcontable.model.Usuario" />
+        </set>
+    </class>
+</hibernate-mapping>

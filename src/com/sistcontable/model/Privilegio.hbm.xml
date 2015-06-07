@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 06-07-2015 11:50:18 AM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="com.sistcontable.model.Privilegio" table="PRIVILEGIO" schema="BAD115" optimistic-lock="version">
+        <id name="idPrivilegio" type="big_decimal">
+            <column name="ID_PRIVILEGIO" precision="22" scale="0" />
+            <generator class="assigned" />
+        </id>
+        <property name="nombrePrivilegio" type="string">
+            <column name="NOMBRE_PRIVILEGIO" length="20" />
+        </property>
+        <property name="descripcion" type="string">
+            <column name="DESCRIPCION" length="100" />
+        </property>
+        <set name="usuarios" table="USUARIO" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="ID_PRIVILEGIO" precision="22" scale="0" />
+            </key>
+            <one-to-many class="com.sistcontable.model.Usuario" />
+        </set>
+    </class>
+</hibernate-mapping>

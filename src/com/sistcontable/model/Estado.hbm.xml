@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 06-07-2015 11:50:18 AM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="com.sistcontable.model.Estado" table="ESTADO" schema="BAD115" optimistic-lock="version">
+        <id name="idEstado" type="big_decimal">
+            <column name="ID_ESTADO" precision="22" scale="0" />
+            <generator class="assigned" />
+        </id>
+        <property name="nombreEstado" type="string">
+            <column name="NOMBRE_ESTADO" length="50" />
+        </property>
+        <property name="disponibilidad" type="big_decimal">
+            <column name="DISPONIBILIDAD" precision="22" scale="0" />
+        </property>
+        <set name="detalleEstados" table="DETALLE_ESTADO" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="ID_ESTADO" precision="22" scale="0" />
+            </key>
+            <one-to-many class="com.sistcontable.model.DetalleEstado" />
+        </set>
+        <set name="cuentas" table="CUENTA" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="ID_ESTADO" precision="22" scale="0" />
+            </key>
+            <one-to-many class="com.sistcontable.model.Cuenta" />
+        </set>
+    </class>
+</hibernate-mapping>

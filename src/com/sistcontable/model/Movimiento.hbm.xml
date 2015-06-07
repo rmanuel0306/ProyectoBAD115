@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 06-07-2015 11:50:18 AM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="com.sistcontable.model.Movimiento" table="MOVIMIENTO" schema="BAD115" optimistic-lock="version">
+        <id name="idMovimiento" type="big_decimal">
+            <column name="ID_MOVIMIENTO" precision="22" scale="0" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="cuenta" class="com.sistcontable.model.Cuenta" fetch="select">
+            <column name="ID_CUENTA" precision="22" scale="0" />
+        </many-to-one>
+        <property name="mes" type="big_decimal">
+            <column name="MES" precision="22" scale="0" />
+        </property>
+        <property name="year" type="big_decimal">
+            <column name="YEAR" precision="22" scale="0" />
+        </property>
+        <property name="debe" type="big_decimal">
+            <column name="DEBE" precision="18" />
+        </property>
+        <property name="haber" type="big_decimal">
+            <column name="HABER" precision="18" />
+        </property>
+        <property name="concepto" type="string">
+            <column name="CONCEPTO" length="3" />
+        </property>
+    </class>
+</hibernate-mapping>

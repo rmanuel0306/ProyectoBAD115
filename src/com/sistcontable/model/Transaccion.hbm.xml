@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 06-07-2015 11:50:18 AM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="com.sistcontable.model.Transaccion" table="TRANSACCION" schema="BAD115" optimistic-lock="version">
+        <id name="idTransaccion" type="big_decimal">
+            <column name="ID_TRANSACCION" precision="22" scale="0" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="usuario" class="com.sistcontable.model.Usuario" fetch="select">
+            <column name="ID_USUARIO" precision="22" scale="0" />
+        </many-to-one>
+        <many-to-one name="cuenta" class="com.sistcontable.model.Cuenta" fetch="select">
+            <column name="ID_CUENTA" precision="22" scale="0" />
+        </many-to-one>
+        <property name="idRelativo" type="big_decimal">
+            <column name="ID_RELATIVO" precision="22" scale="0" />
+        </property>
+        <property name="comportamiento" type="string">
+            <column name="COMPORTAMIENTO" length="2" />
+        </property>
+        <property name="fecha" type="date">
+            <column name="FECHA" length="7" />
+        </property>
+        <property name="concepto" type="string">
+            <column name="CONCEPTO" length="3" />
+        </property>
+        <property name="saldo" type="big_decimal">
+            <column name="SALDO" precision="18" />
+        </property>
+    </class>
+</hibernate-mapping>

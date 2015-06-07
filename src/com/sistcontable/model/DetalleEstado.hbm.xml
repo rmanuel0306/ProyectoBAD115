@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 06-07-2015 11:50:18 AM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="com.sistcontable.model.DetalleEstado" table="DETALLE_ESTADO" schema="BAD115" optimistic-lock="version">
+        <id name="idDetalleEstado" type="big_decimal">
+            <column name="ID_DETALLE_ESTADO" precision="22" scale="0" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="estado" class="com.sistcontable.model.Estado" fetch="select">
+            <column name="ID_ESTADO" precision="22" scale="0" />
+        </many-to-one>
+        <property name="fechaInicio" type="date">
+            <column name="FECHA_INICIO" length="7" />
+        </property>
+        <property name="fechaFin" type="date">
+            <column name="FECHA_FIN" length="7" />
+        </property>
+        <property name="saldoTotal" type="big_decimal">
+            <column name="SALDO_TOTAL" precision="18" />
+        </property>
+        <property name="rutaDocumento" type="string">
+            <column name="RUTA_DOCUMENTO" length="150" />
+        </property>
+    </class>
+</hibernate-mapping>

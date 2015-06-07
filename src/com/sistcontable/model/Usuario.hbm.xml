@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 06-07-2015 11:50:18 AM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="com.sistcontable.model.Usuario" table="USUARIO" schema="BAD115" optimistic-lock="version">
+        <id name="idUsuario" type="big_decimal">
+            <column name="ID_USUARIO" precision="22" scale="0" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="persona" class="com.sistcontable.model.Persona" fetch="select">
+            <column name="ID_PERSONA" precision="22" scale="0" />
+        </many-to-one>
+        <many-to-one name="privilegio" class="com.sistcontable.model.Privilegio" fetch="select">
+            <column name="ID_PRIVILEGIO" precision="22" scale="0" />
+        </many-to-one>
+        <property name="nombreUsuario" type="string">
+            <column name="NOMBRE_USUARIO" length="10" />
+        </property>
+        <property name="clave" type="string">
+            <column name="CLAVE" length="12" />
+        </property>
+        <set name="transaccions" table="TRANSACCION" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="ID_USUARIO" precision="22" scale="0" />
+            </key>
+            <one-to-many class="com.sistcontable.model.Transaccion" />
+        </set>
+        <set name="bitacoras" table="BITACORA" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="ID_USUARIO" precision="22" scale="0" />
+            </key>
+            <one-to-many class="com.sistcontable.model.Bitacora" />
+        </set>
+    </class>
+</hibernate-mapping>
