@@ -1,36 +1,24 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
-<!-- Generated 06-07-2015 01:25:16 PM by Hibernate Tools 4.3.1 -->
+<!-- Generated 05-16-2015 05:08:51 AM by Hibernate Tools 4.3.1 -->
 <hibernate-mapping>
-    <class name="com.sistcontable.model.Usuario" table="USUARIO" schema="BAD115" optimistic-lock="version">
-        <id name="idUsuario" type="big_decimal">
-            <column name="ID_USUARIO" precision="22" scale="0" />
+   <class name="com.sistcontable.model.Usuario" table="USUARIO" schema="BAD115" optimistic-lock="version">
+        <id name="id_usuario" type="double">
+            <column name="ID_USUARIO" length="38" />
             <generator class="assigned" />
         </id>
-        <many-to-one name="persona" class="com.sistcontable.model.Persona" fetch="select">
-            <column name="ID_PERSONA" precision="22" scale="0" />
-        </many-to-one>
-        <many-to-one name="privilegio" class="com.sistcontable.model.Privilegio" fetch="select">
-            <column name="ID_PRIVILEGIO" precision="22" scale="0" />
-        </many-to-one>
-        <property name="nombreUsuario" type="string">
-            <column name="NOMBRE_USUARIO" length="10" />
+        <property name="id_privilegio" type="double">
+            <column name="ID_PRIVILEGIO" length="38" />
         </property>
-        <property name="clave" type="string">
+        <property name="id_persona" type="double">
+            <column name="ID_PERSONA" length="38" />
+        </property>
+        <property name="nombre_usuario" type="string">
+            <column name="NOMBRE_USUARIO" length="5" />
+        </property>
+          <property name="clave" type="string">
             <column name="CLAVE" length="12" />
         </property>
-        <set name="transaccions" table="TRANSACCION" inverse="true" lazy="true" fetch="select">
-            <key>
-                <column name="ID_USUARIO" precision="22" scale="0" />
-            </key>
-            <one-to-many class="com.sistcontable.model.Transaccion" />
-        </set>
-        <set name="bitacoras" table="BITACORA" inverse="true" lazy="true" fetch="select">
-            <key>
-                <column name="ID_USUARIO" precision="22" scale="0" />
-            </key>
-            <one-to-many class="com.sistcontable.model.Bitacora" />
-        </set>
     </class>
 </hibernate-mapping>
