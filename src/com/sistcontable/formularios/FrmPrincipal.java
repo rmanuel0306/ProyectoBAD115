@@ -16,6 +16,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
     
     FrmPersona frmTab1 = new FrmPersona();
     FrmTab2 frmTab2 = new FrmTab2();
+    FrmUsuario frmUser = new FrmUsuario();
     
     
 
@@ -27,7 +28,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
         setLocationRelativeTo(null);
         pnlContenedor.add(frmTab1, "Tab1");
         pnlContenedor.add(frmTab2, "Tab2");
-        
+        pnlContenedor.add(frmUser, "Usuario");
     }
 
     /**
@@ -59,10 +60,12 @@ public class FrmPrincipal extends javax.swing.JFrame {
         jMenu4 = new javax.swing.JMenu();
         jMenuItem10 = new javax.swing.JMenuItem();
         jMenuItem11 = new javax.swing.JMenuItem();
-        jMenu5 = new javax.swing.JMenu();
         jMenu6 = new javax.swing.JMenu();
         itmTab1 = new javax.swing.JMenuItem();
         itmTab2 = new javax.swing.JMenuItem();
+        jMenu5 = new javax.swing.JMenu();
+        jMenu7 = new javax.swing.JMenu();
+        Usuarios = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -156,9 +159,6 @@ public class FrmPrincipal extends javax.swing.JFrame {
 
         jMenuBar1.add(jMenu4);
 
-        jMenu5.setText("Opciones");
-        jMenuBar1.add(jMenu5);
-
         jMenu6.setText("Persona");
 
         itmTab1.setText("Tab1");
@@ -178,6 +178,26 @@ public class FrmPrincipal extends javax.swing.JFrame {
         jMenu6.add(itmTab2);
 
         jMenuBar1.add(jMenu6);
+
+        jMenu5.setText("Opciones");
+        jMenuBar1.add(jMenu5);
+
+        jMenu7.setText("Usuario");
+        jMenu7.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenu7ActionPerformed(evt);
+            }
+        });
+
+        Usuarios.setText("Usuarios");
+        Usuarios.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                UsuariosActionPerformed(evt);
+            }
+        });
+        jMenu7.add(Usuarios);
+
+        jMenuBar1.add(jMenu7);
 
         setJMenuBar(jMenuBar1);
 
@@ -222,10 +242,23 @@ public class FrmPrincipal extends javax.swing.JFrame {
         paletas.show(pnlContenedor, "Tab2");
     }//GEN-LAST:event_itmTab2ActionPerformed
 
+    private void jMenu7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenu7ActionPerformed
+        // TODO add your handling code here:
+       
+    }//GEN-LAST:event_jMenu7ActionPerformed
+
+    private void UsuariosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UsuariosActionPerformed
+        // TODO add your handling code here:
+        CardLayout paletas = (CardLayout) pnlContenedor.getLayout();
+        paletas.show(pnlContenedor, "Usuario");
+    }//GEN-LAST:event_UsuariosActionPerformed
+
+    
     
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JMenuItem Usuarios;
     private javax.swing.JMenuItem itmNuevo;
     private javax.swing.JMenuItem itmTab1;
     private javax.swing.JMenuItem itmTab2;
@@ -237,6 +270,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu4;
     private javax.swing.JMenu jMenu5;
     private javax.swing.JMenu jMenu6;
+    private javax.swing.JMenu jMenu7;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem10;
     private javax.swing.JMenuItem jMenuItem11;
