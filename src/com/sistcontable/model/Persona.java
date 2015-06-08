@@ -151,8 +151,12 @@ public class Persona  implements java.io.Serializable {
         this.usuarios = usuarios;
     }
 
-
-
+    @Override
+    public String toString() {
+        return primerNombre+" "+primerApellido;
+    }
+    
+    
 
 }
 

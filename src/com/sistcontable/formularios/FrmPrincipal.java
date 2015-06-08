@@ -14,7 +14,7 @@ import javax.swing.JOptionPane;
  */
 public class FrmPrincipal extends javax.swing.JFrame {
     
-    FrmTab1 frmTab1 = new FrmTab1();
+    FrmPersona frmTab1 = new FrmPersona();
     FrmTab2 frmTab2 = new FrmTab2();
     
     

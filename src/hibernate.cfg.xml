@@ -7,6 +7,9 @@
     <property name="hibernate.connection.url">jdbc:oracle:thin:@localhost:1521:orcl</property>
     <property name="hibernate.connection.username">BAD115</property>
     <property name="hibernate.connection.password">SITGECON</property>
+    <property name="hibernate.current_session_context_class">thread</property>
+    <property name="hibernate.query.factory_class">org.hibernate.hql.internal.classic.ClassicQueryTranslatorFactory</property>
+    <property name="hibernate.show_sql">true</property>
     <mapping resource="com/sistcontable/model/Departamento.hbm.xml"/>
     <mapping resource="com/sistcontable/model/Persona.hbm.xml"/>
     <mapping resource="com/sistcontable/model/Telefono.hbm.xml"/>
