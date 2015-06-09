@@ -6,7 +6,9 @@
 package com.sistcontable.dao;
 
 import com.sistcontable.hibernate.util.HibernateUtil;
+import com.sistcontable.model.Persona;
 import com.sistcontable.model.Usuario;
+import java.math.BigDecimal;
 
 import java.sql.CallableStatement;
 import java.sql.Connection;
@@ -63,7 +65,7 @@ public class UsuarioDAO {
             String query = "select * from usuario";
             SQLQuery sqlQuery = session.createSQLQuery(query);
             sqlQuery.addEntity(Usuario.class);               
-            lista = sqlQuery.list();            
+            lista = sqlQuery.list();     
         }catch (Exception e){
             System.out.println("ERROR " + e);
             lista = null;
@@ -72,6 +74,37 @@ public class UsuarioDAO {
         }
         return lista;
     } 
+     
+     
+      public Persona[] listaPersonas(){
+        Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+        session.beginTransaction();
+        Persona[] apersona=null;
+        try{
+            String query = "select id_persona,primer_nombre,primer_apellido from persona";
+            SQLQuery sqlQuery = session.createSQLQuery(query);
+            int i=0;
+            int longLista=sqlQuery.list().size();
+            apersona=new Persona[longLista];
+            for(i=0;i<longLista;i++){
+                apersona[i] = new Persona();  
+            }
+            System.out.println("longitud lista "+longLista);       
+            i=0;
+            List<Object[]> rows = sqlQuery.list();           
+            for(Object[] row : rows){   
+            apersona[i].setIdPersona(BigDecimal.valueOf(Double.parseDouble(row[0].toString())));
+            apersona[i].setPrimerNombre(row[1].toString());
+            apersona[i].setPrimerApellido(row[2].toString());
+              i++; 
+            }
+        }catch (Exception e){
+            System.out.println("ERROR " + e);
+        }finally{
+            session.close();
+        }
+        return apersona;
+    }  
      
     public boolean saveUser(Usuario usuario){
         Session session = HibernateUtil.getSessionFactory().getCurrentSession();

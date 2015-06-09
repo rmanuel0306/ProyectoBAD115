@@ -11,11 +11,13 @@ import com.sistcontable.model.Persona;
 import com.sistcontable.model.Usuario;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.DefaultListModel;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -38,11 +40,17 @@ public class FrmUsuario extends javax.swing.JPanel {
         jList1.setModel(modeloLista);
         textID.setEditable(false);
         textNombre.setEditable(false);
-        textPersona.setEditable(false);
+        listaIdPersona.setEditable(false);
         textClave.setEditable(false);
-        List<Double> lista =new ArrayList();
-        lista=usuarioDAO.listaPersonas();        
-        listaIdPersona.setModel(new DefaultComboBoxModel(lista.toArray()));
+        List<Persona> lista =new ArrayList();
+        Persona[] personas;
+        personas=usuarioDAO.listaPersonas(); 
+        int longPersonas=personas.length;
+        String[] listaP=new String[longPersonas];
+        for(int i=0;i<longPersonas;i++){
+            listaP[i]=personas[i].getIdPersona().intValue()+" "+personas[i].getPrimerNombre()+" "+personas[i].getPrimerApellido();
+        }
+        listaIdPersona.setModel(new DefaultComboBoxModel(listaP));
     }
    
 
@@ -70,7 +78,6 @@ public class FrmUsuario extends javax.swing.JPanel {
         labelInformacion = new javax.swing.JLabel();
         labelMensaje = new javax.swing.JLabel();
         textID = new javax.swing.JTextField();
-        textPersona = new javax.swing.JTextField();
         textNombre = new javax.swing.JTextField();
         textClave = new javax.swing.JTextField();
         listaIdPersona = new javax.swing.JComboBox();
@@ -147,11 +154,11 @@ public class FrmUsuario extends javax.swing.JPanel {
             }
         });
 
-        jLabel1.setText("ID_usuario");
+        jLabel1.setText("ID de usuario");
 
-        jLabel2.setText("Id_persona");
+        jLabel2.setText("Id de persona");
 
-        jLabel3.setText("Nombre_usuario");
+        jLabel3.setText("Nombre de usuario");
 
         jLabel4.setText("Clave");
 
@@ -165,8 +172,6 @@ public class FrmUsuario extends javax.swing.JPanel {
             }
         });
 
-        listaIdPersona.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -179,8 +184,8 @@ public class FrmUsuario extends javax.swing.JPanel {
                         .addGap(132, 132, 132)
                         .addComponent(btnEditar))
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(30, 30, 30)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addGap(117, 117, 117)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel1)
@@ -189,19 +194,18 @@ public class FrmUsuario extends javax.swing.JPanel {
                                     .addComponent(jLabel4))
                                 .addGap(60, 60, 60)
                                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(listaIdPersona, 0, 214, Short.MAX_VALUE)
                                     .addComponent(textNombre)
                                     .addComponent(textClave)
-                                    .addComponent(textID)
-                                    .addComponent(textPersona, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                    .addComponent(textID))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(btnEliminar, javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(btnGuardar, javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(btnNuevo, javax.swing.GroupLayout.Alignment.TRAILING)))
                             .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addComponent(labelMensaje, javax.swing.GroupLayout.PREFERRED_SIZE, 390, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(listaIdPersona, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 161, Short.MAX_VALUE)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(btnEliminar, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(btnGuardar, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(btnNuevo, javax.swing.GroupLayout.Alignment.TRAILING))))
+                                .addComponent(labelMensaje, javax.swing.GroupLayout.PREFERRED_SIZE, 445, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 145, Short.MAX_VALUE)))))
                 .addGap(103, 103, 103))
         );
         jPanel2Layout.setVerticalGroup(
@@ -223,8 +227,8 @@ public class FrmUsuario extends javax.swing.JPanel {
                                 .addComponent(textID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
                                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(textPersona, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel2)))
+                                    .addComponent(jLabel2)
+                                    .addComponent(listaIdPersona, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addComponent(btnNuevo))
                         .addGap(18, 18, 18)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -240,16 +244,11 @@ public class FrmUsuario extends javax.swing.JPanel {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(labelMensaje, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addComponent(btnEliminar)
-                                .addGap(0, 41, Short.MAX_VALUE)))
-                        .addContainerGap())
+                        .addComponent(btnEliminar)
+                        .addContainerGap(68, Short.MAX_VALUE))
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(16, 16, 16)
-                        .addComponent(listaIdPersona, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                        .addGap(56, 56, 56)
+                        .addComponent(labelMensaje, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -270,8 +269,10 @@ public class FrmUsuario extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(126, Short.MAX_VALUE))
+                .addContainerGap(108, Short.MAX_VALUE))
         );
+
+        jPanel2.getAccessibleContext().setAccessibleName("Gestion de usuario");
     }// </editor-fold>//GEN-END:initComponents
 
     private void jList1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jList1MouseClicked
@@ -283,18 +284,30 @@ public class FrmUsuario extends javax.swing.JPanel {
     private void jList1ValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_jList1ValueChanged
         // TODO add your handling code here:
        int index = jList1.getSelectedIndex();
+       int id=0,i=0;
         if (index != -1) {
             Usuario objMostrarUsuario = (Usuario) modeloLista.getElementAt(index);
             idActual = String.valueOf(objMostrarUsuario.getId_usuario());            
             textID.setText(idActual);
             textNombre.setText(objMostrarUsuario.getNombre_usuario());
-            textPersona.setText(String.valueOf(objMostrarUsuario.getId_persona()));
+         //   textPersona.setText(String.valueOf(objMostrarUsuario.getId_persona()));
             textClave.setText(objMostrarUsuario.getClave());     
             labelInformacion.setText(objMostrarUsuario.getNombre_usuario());
+            for(i=0;i<listaIdPersona.getItemCount();i++){
+                if(String.valueOf(objMostrarUsuario.getId_persona()).contains(obtenerNumero(listaIdPersona.getItemAt(i).toString()))){
+                   System.out.println("num lista "+obtenerNumero(listaIdPersona.getItemAt(i).toString()));
+                   System.out.println("num id "+String.valueOf(objMostrarUsuario.getId_persona()));
+                   System.out.println("son iguales ---"+i);
+                    id=i;} 
+            }            
+           // listaIdPersona.setSelectedItem(id);
+           if(listaIdPersona.getItemCount()>1) 
+            listaIdPersona.setSelectedIndex(id);
         }
         textID.setEditable(false);
         textNombre.setEditable(false);
-        textPersona.setEditable(false);
+      //  textPersona.setEditable(false);
+        listaIdPersona.setEditable(false);
         textClave.setEditable(false);
         //labelMensaje.setText("");
         //labelMensaje.setIcon(null);
@@ -302,14 +315,14 @@ public class FrmUsuario extends javax.swing.JPanel {
 
     private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
         // TODO add your handling code here:
-        isUpdate = Boolean.TRUE;
-        
+        isUpdate = Boolean.TRUE;        
         labelMensaje.setText("");
         labelMensaje.setIcon(null);
         textNombre.setEditable(true);
         textID.setEditable(true);
         textClave.setEditable(true);
-        textPersona.setEditable(true);
+     //   textPersona.setEditable(true);
+        listaIdPersona.setEditable(true);
     }//GEN-LAST:event_btnEditarActionPerformed
 
     private void btnNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNuevoActionPerformed
@@ -320,25 +333,26 @@ public class FrmUsuario extends javax.swing.JPanel {
         labelMensaje.setIcon(null);
         textID.setEditable(true);
         textNombre.setEditable(true);
-        textPersona.setEditable(true);
+        //textPersona.setEditable(true);
+        listaIdPersona.setEditable(true);
         textClave.setEditable(true);
         
         textID.setText("");
         textNombre.setText("");
-        textPersona.setText("");
+        //textPersona.setText("");
         textClave.setText("");
     }//GEN-LAST:event_btnNuevoActionPerformed
 
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
         // TODO add your handling code here:
        boolean resp = Boolean.FALSE;
-        if(textID.getText().equals("") || textNombre.getText().equals("") || textPersona.getText().equals("")
+        if(textID.getText().equals("") || textNombre.getText().equals("") || listaIdPersona.getSelectedItem().toString().equals("")
                 || textClave.getText().equals("")){
             MostrarMensaje("Uno o mas campos estan vacios","cancel.png", labelMensaje);
         }else{
             usuario.setId_usuario(Double.parseDouble(textID.getText()));
             usuario.setNombre_usuario(textNombre.getText());
-            usuario.setId_persona(Double.parseDouble(textPersona.getText()));
+            usuario.setId_persona(Double.parseDouble(obtenerNumero(listaIdPersona.getSelectedItem().toString())));
             usuario.setClave(textClave.getText());
             
             if(isUpdate)
@@ -358,6 +372,14 @@ public class FrmUsuario extends javax.swing.JPanel {
 
     private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
         // TODO add your handling code here:
+        if(textID.getText().equals("")){
+            JOptionPane.showMessageDialog(null, "Debe seleccionar un usuario para eliminar");
+            return;
+        }
+        textID.setEditable(true);
+        textNombre.setEditable(false);
+        listaIdPersona.setEditable(false);
+        textClave.setEditable(false);
          boolean resp = Boolean.FALSE;
         resp=usuarioDAO.deleteUser(idActual);        
         Actualizar_lista();        
@@ -378,6 +400,28 @@ public class FrmUsuario extends javax.swing.JPanel {
             jList1.setSelectedIndex(0);
         }      
     }
+      
+    public String obtenerNumero(String cadena){
+        String numeros="",letras="";
+        for (short indice = 0; indice < cadena.length(); indice++){
+          char caracter = cadena.charAt(indice);
+        if(esNumero(caracter)){
+            numeros += caracter;
+        }else{
+        letras += caracter;
+        }
+        }
+    return numeros;    
+    }
+    
+    private static boolean esNumero(char caracter){
+    try {
+    Integer.parseInt(String.valueOf(caracter));
+    return true;
+    } catch (NumberFormatException ex){
+    return false;
+        }
+        }
     
     public void MostrarMensaje(String msj, String nameImagen, JLabel label) {
         label.setText(msj);
@@ -411,6 +455,5 @@ public class FrmUsuario extends javax.swing.JPanel {
     private javax.swing.JTextField textClave;
     private javax.swing.JTextField textID;
     private javax.swing.JTextField textNombre;
-    private javax.swing.JTextField textPersona;
     // End of variables declaration//GEN-END:variables
 }
