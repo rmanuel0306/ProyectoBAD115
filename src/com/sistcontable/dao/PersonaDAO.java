@@ -49,7 +49,7 @@ public class PersonaDAO {
         try{          
             String query = "CALL savePerson(:idmuni,:priNombre,:segNombre,:priApellido,:segApellido,:cargo,:sexo,:fechNac,:dui,:email,:direccion)";
             Query sqlQuery = session.createSQLQuery(query).addEntity(Persona.class)
-                    .setParameter("idmuni", persona.getIdMuni())
+                    .setParameter("idmuni", persona.getIdMunicipio())
                     .setParameter("priNombre", persona.getPrimerNombre())
                     .setParameter("segNombre", persona.getSegundoNombre())
                     .setParameter("priApellido", persona.getPrimerApellido())

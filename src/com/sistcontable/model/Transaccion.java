@@ -1,5 +1,5 @@
 package com.sistcontable.model;
-// Generated 06-07-2015 01:25:15 PM by Hibernate Tools 4.3.1
+// Generated 06-10-2015 01:21:20 AM by Hibernate Tools 4.3.1
 
 
 import java.math.BigDecimal;
@@ -12,8 +12,8 @@ public class Transaccion  implements java.io.Serializable {
 
 
      private BigDecimal idTransaccion;
-     private Usuario usuario;
      private Cuenta cuenta;
+     private Usuario usuario;
      private BigDecimal idRelativo;
      private String comportamiento;
      private Date fecha;
@@ -27,10 +27,10 @@ public class Transaccion  implements java.io.Serializable {
     public Transaccion(BigDecimal idTransaccion) {
         this.idTransaccion = idTransaccion;
     }
-    public Transaccion(BigDecimal idTransaccion, Usuario usuario, Cuenta cuenta, BigDecimal idRelativo, String comportamiento, Date fecha, String concepto, BigDecimal saldo) {
+    public Transaccion(BigDecimal idTransaccion, Cuenta cuenta, Usuario usuario, BigDecimal idRelativo, String comportamiento, Date fecha, String concepto, BigDecimal saldo) {
        this.idTransaccion = idTransaccion;
-       this.usuario = usuario;
        this.cuenta = cuenta;
+       this.usuario = usuario;
        this.idRelativo = idRelativo;
        this.comportamiento = comportamiento;
        this.fecha = fecha;
@@ -45,19 +45,19 @@ public class Transaccion  implements java.io.Serializable {
     public void setIdTransaccion(BigDecimal idTransaccion) {
         this.idTransaccion = idTransaccion;
     }
-    public Usuario getUsuario() {
-        return this.usuario;
-    }
-    
-    public void setUsuario(Usuario usuario) {
-        this.usuario = usuario;
-    }
     public Cuenta getCuenta() {
         return this.cuenta;
     }
     
     public void setCuenta(Cuenta cuenta) {
         this.cuenta = cuenta;
+    }
+    public Usuario getUsuario() {
+        return this.usuario;
+    }
+    
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
     }
     public BigDecimal getIdRelativo() {
         return this.idRelativo;

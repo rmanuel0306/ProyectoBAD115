@@ -1,18 +1,18 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
-<!-- Generated 06-07-2015 01:25:16 PM by Hibernate Tools 4.3.1 -->
+<!-- Generated 06-10-2015 01:28:52 AM by Hibernate Tools 4.3.1 -->
 <hibernate-mapping>
     <class name="com.sistcontable.model.Transaccion" table="TRANSACCION" schema="BAD115" optimistic-lock="version">
         <id name="idTransaccion" type="big_decimal">
             <column name="ID_TRANSACCION" precision="22" scale="0" />
             <generator class="assigned" />
         </id>
-        <many-to-one name="usuario" class="com.sistcontable.model.Usuario" fetch="select">
-            <column name="ID_USUARIO" precision="22" scale="0" />
-        </many-to-one>
         <many-to-one name="cuenta" class="com.sistcontable.model.Cuenta" fetch="select">
             <column name="ID_CUENTA" precision="22" scale="0" />
+        </many-to-one>
+        <many-to-one name="usuario" class="com.sistcontable.model.Usuario" fetch="select">
+            <column name="ID_USUARIO" precision="22" scale="0" />
         </many-to-one>
         <property name="idRelativo" type="big_decimal">
             <column name="ID_RELATIVO" precision="22" scale="0" />

@@ -1,5 +1,5 @@
 package com.sistcontable.model;
-// Generated 06-07-2015 01:25:15 PM by Hibernate Tools 4.3.1
+// Generated 06-10-2015 01:21:20 AM by Hibernate Tools 4.3.1
 
 
 import java.math.BigDecimal;
@@ -13,10 +13,10 @@ public class Cuenta  implements java.io.Serializable {
 
 
      private BigDecimal idCuenta;
-     private Rubro rubro;
      private Estado estado;
+     private Rubro rubro;
      private String nombreCuenta;
-     private String cuentaMayor;
+     private BigDecimal cuentaMayor;
      private Set transaccions = new HashSet(0);
      private Set movimientos = new HashSet(0);
 
@@ -27,10 +27,10 @@ public class Cuenta  implements java.io.Serializable {
     public Cuenta(BigDecimal idCuenta) {
         this.idCuenta = idCuenta;
     }
-    public Cuenta(BigDecimal idCuenta, Rubro rubro, Estado estado, String nombreCuenta, String cuentaMayor, Set transaccions, Set movimientos) {
+    public Cuenta(BigDecimal idCuenta, Estado estado, Rubro rubro, String nombreCuenta, BigDecimal cuentaMayor, Set transaccions, Set movimientos) {
        this.idCuenta = idCuenta;
-       this.rubro = rubro;
        this.estado = estado;
+       this.rubro = rubro;
        this.nombreCuenta = nombreCuenta;
        this.cuentaMayor = cuentaMayor;
        this.transaccions = transaccions;
@@ -44,19 +44,19 @@ public class Cuenta  implements java.io.Serializable {
     public void setIdCuenta(BigDecimal idCuenta) {
         this.idCuenta = idCuenta;
     }
-    public Rubro getRubro() {
-        return this.rubro;
-    }
-    
-    public void setRubro(Rubro rubro) {
-        this.rubro = rubro;
-    }
     public Estado getEstado() {
         return this.estado;
     }
     
     public void setEstado(Estado estado) {
         this.estado = estado;
+    }
+    public Rubro getRubro() {
+        return this.rubro;
+    }
+    
+    public void setRubro(Rubro rubro) {
+        this.rubro = rubro;
     }
     public String getNombreCuenta() {
         return this.nombreCuenta;
@@ -65,11 +65,11 @@ public class Cuenta  implements java.io.Serializable {
     public void setNombreCuenta(String nombreCuenta) {
         this.nombreCuenta = nombreCuenta;
     }
-    public String getCuentaMayor() {
+    public BigDecimal getCuentaMayor() {
         return this.cuentaMayor;
     }
     
-    public void setCuentaMayor(String cuentaMayor) {
+    public void setCuentaMayor(BigDecimal cuentaMayor) {
         this.cuentaMayor = cuentaMayor;
     }
     public Set getTransaccions() {

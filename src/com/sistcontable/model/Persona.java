@@ -1,5 +1,5 @@
 package com.sistcontable.model;
-// Generated 06-07-2015 01:25:15 PM by Hibernate Tools 4.3.1
+// Generated 06-10-2015 01:21:20 AM by Hibernate Tools 4.3.1
 
 
 import java.math.BigDecimal;
@@ -15,6 +15,7 @@ public class Persona  implements java.io.Serializable {
 
      private BigDecimal idPersona;
      private Municipio municipio;
+     private int idMunicipio;
      private String primerNombre;
      private String segundoNombre;
      private String primerApellido;
@@ -27,15 +28,6 @@ public class Persona  implements java.io.Serializable {
      private String direccion;
      private Set telefonos = new HashSet(0);
      private Set usuarios = new HashSet(0);
-
-    public int getIdMuni() {
-        return idMuni;
-    }
-
-    public void setIdMuni(int idMuni) {
-        this.idMuni = idMuni;
-    }
-     private int idMuni;
 
     public Persona() {
     }
@@ -160,13 +152,18 @@ public class Persona  implements java.io.Serializable {
         this.usuarios = usuarios;
     }
 
+    public int getIdMunicipio() {
+        return idMunicipio;
+    }
+
+    public void setIdMunicipio(int idMunicipio) {
+        this.idMunicipio = idMunicipio;
+    }
+    
     @Override
     public String toString() {
         return primerNombre+" "+primerApellido;
     }
-    
-    
-
 }
 
 

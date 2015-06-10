@@ -1,24 +1,24 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
-<!-- Generated 06-07-2015 01:25:16 PM by Hibernate Tools 4.3.1 -->
+<!-- Generated 06-10-2015 01:28:52 AM by Hibernate Tools 4.3.1 -->
 <hibernate-mapping>
     <class name="com.sistcontable.model.Cuenta" table="CUENTA" schema="BAD115" optimistic-lock="version">
         <id name="idCuenta" type="big_decimal">
             <column name="ID_CUENTA" precision="22" scale="0" />
             <generator class="assigned" />
         </id>
-        <many-to-one name="rubro" class="com.sistcontable.model.Rubro" fetch="select">
-            <column name="ID_RUBRO" precision="22" scale="0" />
-        </many-to-one>
         <many-to-one name="estado" class="com.sistcontable.model.Estado" fetch="select">
             <column name="ID_ESTADO" precision="22" scale="0" />
+        </many-to-one>
+        <many-to-one name="rubro" class="com.sistcontable.model.Rubro" fetch="select">
+            <column name="ID_RUBRO" precision="22" scale="0" />
         </many-to-one>
         <property name="nombreCuenta" type="string">
             <column name="NOMBRE_CUENTA" length="100" />
         </property>
-        <property name="cuentaMayor" type="string">
-            <column name="CUENTA_MAYOR" length="100" />
+        <property name="cuentaMayor" type="big_decimal">
+            <column name="CUENTA_MAYOR" precision="22" scale="0" />
         </property>
         <set name="transaccions" table="TRANSACCION" inverse="true" lazy="true" fetch="select">
             <key>

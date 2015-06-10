@@ -387,7 +387,7 @@ public class FrmPersona extends javax.swing.JPanel {
             persona.setSegundoApellido(textSegundoApellido.getText());
             //falta hacer consulta del municipio
             combMunicipio.getSelectedItem();
-            persona.setIdMuni(1);
+            persona.setIdMunicipio(1);
             /////////////////////////////////
             persona.setCargo(textCargo.getText());
             

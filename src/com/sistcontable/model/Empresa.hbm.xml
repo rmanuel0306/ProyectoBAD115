@@ -1,13 +1,16 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
-<!-- Generated 06-07-2015 01:25:16 PM by Hibernate Tools 4.3.1 -->
+<!-- Generated 06-10-2015 01:28:52 AM by Hibernate Tools 4.3.1 -->
 <hibernate-mapping>
     <class name="com.sistcontable.model.Empresa" table="EMPRESA" schema="BAD115" optimistic-lock="version">
         <id name="enombre" type="string">
             <column name="ENOMBRE" length="50" />
             <generator class="assigned" />
         </id>
+        <property name="idEmpresa" type="big_decimal">
+            <column name="ID_EMPRESA" precision="22" scale="0" not-null="true" />
+        </property>
         <property name="edireccion" type="string">
             <column name="EDIRECCION" length="100" />
         </property>
