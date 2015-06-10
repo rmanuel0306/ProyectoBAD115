@@ -28,6 +28,15 @@ public class Persona  implements java.io.Serializable {
      private Set telefonos = new HashSet(0);
      private Set usuarios = new HashSet(0);
 
+    public int getIdMuni() {
+        return idMuni;
+    }
+
+    public void setIdMuni(int idMuni) {
+        this.idMuni = idMuni;
+    }
+     private int idMuni;
+
     public Persona() {
     }
 
