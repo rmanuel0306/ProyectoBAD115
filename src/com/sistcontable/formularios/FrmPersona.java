@@ -396,16 +396,13 @@ public class FrmPersona extends javax.swing.JPanel {
             persona.setDui(textDUI.getText());
             persona.setEMail(textEmail.getText());
             persona.setDireccion(textDireccion.getText());
-               
-            resp=personaDAO.savePerson(persona);
-            //personaDAO.savePerson();
-            //resp=personaDAO.savePrueba(prueba);
             
-            /*if(isUpdate)
-                resp=personaDAO.updatePerson(persona);
+            if(isUpdate)
+                //resp=personaDAO.updatePerson(persona);
+                System.out.println("Actualizar");
             else{
                 resp=personaDAO.savePerson(persona);
-            }*/
+            }
             if (resp) {
                 MostrarMensaje("Usuario Registrado Corecctamente","ok.png", labelMensaje);
                 // mandar a guardar los telefonos si hay

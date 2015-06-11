@@ -161,7 +161,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
 
         jMenu6.setText("Persona");
 
-        itmTab1.setText("Tab1");
+        itmTab1.setText("Personas");
         itmTab1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 itmTab1ActionPerformed(evt);
