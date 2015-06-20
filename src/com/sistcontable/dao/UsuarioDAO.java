@@ -111,13 +111,12 @@ public class UsuarioDAO {
         session.beginTransaction();
         Boolean isInsert = Boolean.FALSE;        
         try{          
-            String query = "call PROC_USUARIO(:opc,:idusuario,:priv,:idpersona,:nombreusuario,:pass)";
+            String query = "call PROC_USUARIO(:opc,'',:priv,:idpersona,:nombreusuario,:pass)";
             //String query = "insert into usuario(id_usuario,id_privilegio,id_persona,nombre_usuario,clave)"
            //         + "values(:idusuario,:priv,:idpersona,:nombreusuario,:pass)";
             Query sqlQuery = session.createSQLQuery(query).addEntity(Usuario.class)
                     .setParameter("opc", 1)
                     .setParameter("priv", 1)
-                    .setParameter("idusuario", usuario.getId_usuario())
                     .setParameter("idpersona", usuario.getId_persona())
                     .setParameter("nombreusuario", usuario.getNombre_usuario())
                     .setParameter("pass", usuario.getClave());
