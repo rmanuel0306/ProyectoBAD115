@@ -17,6 +17,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
     FrmPersona frmTab1 = new FrmPersona();
     FrmTab2 frmTab2 = new FrmTab2();
     FrmUsuario frmUser = new FrmUsuario();
+    FrmCuenta frmCuenta = new FrmCuenta();
     
     
 
@@ -29,6 +30,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
         pnlContenedor.add(frmTab1, "Tab1");
         pnlContenedor.add(frmTab2, "Tab2");
         pnlContenedor.add(frmUser, "Usuario");
+        pnlContenedor.add(frmCuenta, "Cuenta");
     }
 
     /**
@@ -66,6 +68,11 @@ public class FrmPrincipal extends javax.swing.JFrame {
         jMenu5 = new javax.swing.JMenu();
         jMenu7 = new javax.swing.JMenu();
         Usuarios = new javax.swing.JMenuItem();
+        jMenu8 = new javax.swing.JMenu();
+        jMenuItem1 = new javax.swing.JMenuItem();
+        jMenuItem12 = new javax.swing.JMenuItem();
+        jMenuItem13 = new javax.swing.JMenuItem();
+        jMenuItem14 = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -199,6 +206,42 @@ public class FrmPrincipal extends javax.swing.JFrame {
 
         jMenuBar1.add(jMenu7);
 
+        jMenu8.setText("Cuentas");
+
+        jMenuItem1.setText("Catalogo de cuentas");
+        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem1ActionPerformed(evt);
+            }
+        });
+        jMenu8.add(jMenuItem1);
+
+        jMenuItem12.setText("Crear nueva cuenta");
+        jMenuItem12.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem12ActionPerformed(evt);
+            }
+        });
+        jMenu8.add(jMenuItem12);
+
+        jMenuItem13.setText("Modificar cuenta existente");
+        jMenuItem13.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem13ActionPerformed(evt);
+            }
+        });
+        jMenu8.add(jMenuItem13);
+
+        jMenuItem14.setText("Eliminar cuenta");
+        jMenuItem14.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem14ActionPerformed(evt);
+            }
+        });
+        jMenu8.add(jMenuItem14);
+
+        jMenuBar1.add(jMenu8);
+
         setJMenuBar(jMenuBar1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -253,6 +296,30 @@ public class FrmPrincipal extends javax.swing.JFrame {
         paletas.show(pnlContenedor, "Usuario");
     }//GEN-LAST:event_UsuariosActionPerformed
 
+    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+       CardLayout paletas = (CardLayout) pnlContenedor.getLayout();
+        paletas.show(pnlContenedor, "Cuenta");   
+        frmCuenta.jTabbedPane_cuenta.setSelectedIndex(0);
+    }//GEN-LAST:event_jMenuItem1ActionPerformed
+
+    private void jMenuItem12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem12ActionPerformed
+        CardLayout paletas = (CardLayout) pnlContenedor.getLayout();
+        paletas.show(pnlContenedor, "Cuenta");   
+        frmCuenta.jTabbedPane_cuenta.setSelectedIndex(1);
+    }//GEN-LAST:event_jMenuItem12ActionPerformed
+
+    private void jMenuItem13ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem13ActionPerformed
+        CardLayout paletas = (CardLayout) pnlContenedor.getLayout();
+        paletas.show(pnlContenedor, "Cuenta");   
+        frmCuenta.jTabbedPane_cuenta.setSelectedIndex(2);
+    }//GEN-LAST:event_jMenuItem13ActionPerformed
+
+    private void jMenuItem14ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem14ActionPerformed
+        CardLayout paletas = (CardLayout) pnlContenedor.getLayout();
+        paletas.show(pnlContenedor, "Cuenta");   
+        frmCuenta.jTabbedPane_cuenta.setSelectedIndex(3);
+    }//GEN-LAST:event_jMenuItem14ActionPerformed
+
     
     
     
@@ -271,9 +338,14 @@ public class FrmPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu5;
     private javax.swing.JMenu jMenu6;
     private javax.swing.JMenu jMenu7;
+    private javax.swing.JMenu jMenu8;
     private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem10;
     private javax.swing.JMenuItem jMenuItem11;
+    private javax.swing.JMenuItem jMenuItem12;
+    private javax.swing.JMenuItem jMenuItem13;
+    private javax.swing.JMenuItem jMenuItem14;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem4;
