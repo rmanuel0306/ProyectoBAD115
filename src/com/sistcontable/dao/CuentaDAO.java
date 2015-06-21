@@ -27,17 +27,18 @@ public class CuentaDAO {
             SQLQuery sqlQuery = session.createSQLQuery(query);
             sqlQuery.addEntity(Cuenta.class);
             sqlQuery.setParameter("idCuenta", id); 
-            List result = sqlQuery.list(); 
-            for(int i=0;i<result.size();i++){
+            List result = sqlQuery.list();
+            
+            /*for(int i=0;i<result.size();i++){
                 System.out.println("id: ");
                 Cuenta cuenta = (Cuenta)result.get(i);
                 
                 System.out.println("idCuenta: "+cuenta.getIdCuenta());
-                System.out.println("estado: "+cuenta.getEstado());
-                System.out.println("rubro: "+cuenta.getRubro());
+                System.out.println("estado: "+cuenta.getEstado().getNombreEstado());
+                System.out.println("rubro: "+cuenta.getRubro().getNombreRubro());
                 System.out.println("nombreCuenta: "+cuenta.getNombreCuenta());
                 System.out.println("cuentaMayor: "+cuenta.getCuentaMayor());
-            }            
+            } */           
         }catch (Exception e){
             System.out.println("ERROR " + e);
             lista = null;
@@ -55,7 +56,19 @@ public class CuentaDAO {
             String query = "select * from cuenta";
             SQLQuery sqlQuery = session.createSQLQuery(query);
             sqlQuery.addEntity(Cuenta.class);               
-            lista = sqlQuery.list();     
+            lista = sqlQuery.list(); 
+            
+            /*for(int i=0; i<lista.size() ; i++){
+                System.out.println("-------------------------------------------------");
+                System.out.println("idCuenta: "+lista.get(i).getIdCuenta());
+                System.out.println("estado: "+lista.get(i).getEstado().getNombreEstado());
+                System.out.println("rubro: "+lista.get(i).getRubro().getNombreRubro());
+                System.out.println("nombreCuenta: "+lista.get(i).getNombreCuenta());
+                System.out.println("cuentaMayor: "+lista.get(i).getCuentaMayor());
+                
+            }*/
+                
+            
         }catch (Exception e){
             System.out.println("ERROR " + e);
             lista = null;
