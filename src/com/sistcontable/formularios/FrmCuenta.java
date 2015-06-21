@@ -5,12 +5,29 @@
  */
 package com.sistcontable.formularios;
 
+import com.sistcontable.dao.CuentaDAO;
+import com.sistcontable.model.Cuenta;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Vector;
+import javax.swing.DefaultSingleSelectionModel;
+import javax.swing.JOptionPane;
+import javax.swing.SingleSelectionModel;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
+
 /**
  *
  * @author Administrador
  */
 public class FrmCuenta extends javax.swing.JPanel {
-
+    Cuenta cuenta  = new Cuenta();
+    CuentaDAO cuentaDAO = new CuentaDAO();
+    
+    //private DefaultListModel modeloLista = new DefaultListModel();
+    //private List<Usuario> objUsuario;
+    //private String idActual;
+    //private Boolean isUpdate = Boolean.FALSE;
 
     /**
      * Creates new form FrmCuenta
@@ -32,7 +49,8 @@ public class FrmCuenta extends javax.swing.JPanel {
         jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTable2 = new javax.swing.JTable();
+        jTable_panel1_catalogo = new javax.swing.JTable();
+        jButton6 = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
@@ -85,18 +103,25 @@ public class FrmCuenta extends javax.swing.JPanel {
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("CATALOGO DE CUENTAS");
 
-        jTable2.setModel(new javax.swing.table.DefaultTableModel(
+        jTable_panel1_catalogo.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {},
+                {},
+                {},
+                {}
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+
             }
         ));
-        jScrollPane2.setViewportView(jTable2);
+        jScrollPane2.setViewportView(jTable_panel1_catalogo);
+
+        jButton6.setText("Mostrar");
+        jButton6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton6ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -106,7 +131,10 @@ public class FrmCuenta extends javax.swing.JPanel {
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 1034, Short.MAX_VALUE)
-                    .addComponent(jScrollPane2))
+                    .addComponent(jScrollPane2)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(jButton6)))
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
@@ -115,7 +143,9 @@ public class FrmCuenta extends javax.swing.JPanel {
                 .addContainerGap()
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 401, Short.MAX_VALUE)
+                .addComponent(jButton6)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 11, Short.MAX_VALUE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 367, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
 
@@ -487,6 +517,44 @@ public class FrmCuenta extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField6ActionPerformed
 
+    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+        
+        List<Cuenta> lista =cuentaDAO.searchAllCuentas();
+        Object dato[] = new Object[5];
+        Vector datos = new Vector();
+        //System.out.println(lista.size());
+        DefaultTableModel model = new DefaultTableModel();
+        model.addColumn("ID CUENTA");
+        model.addColumn("ESTADO FINANCIERO");
+        model.addColumn("RUBRO");
+        model.addColumn("NOMBRE CUENTA");
+        model.addColumn("CUENTA MAYOR");
+        dato[0]=lista.get(0).getIdCuenta();
+        dato[1]=lista.get(0).getEstado();
+        dato[2]=lista.get(0).getRubro();
+        dato[3]=lista.get(0).getNombreCuenta();
+        dato[4]=lista.get(0).getCuentaMayor();
+        
+        datos.add(lista.get(0).getIdCuenta());
+        datos.add(lista.get(0).getEstado());
+        datos.add(lista.get(0).getRubro());
+        datos.add(lista.get(0).getNombreCuenta());
+        datos.add(lista.get(0).getCuentaMayor());     
+   
+        JOptionPane.showMessageDialog(null, lista.get(0).getEstado().toString());
+        
+        model.addRow(new Object[]{lista.get(0).getEstado(), "Column 2", "Column 3"});
+        /*model.addRow(new Object[]{lista.get(0).getIdCuenta().toString(),
+                                  lista.get(0).getEstado().toString(),
+                                  lista.get(0).getRubro().toString(),
+                                  lista.get(0).getNombreCuenta().toString(),
+                                  lista.get(0).getCuentaMayor().toString() });*/
+        
+        
+        jTable_panel1_catalogo.setModel(model);
+                
+    }//GEN-LAST:event_jButton6ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
@@ -494,6 +562,7 @@ public class FrmCuenta extends javax.swing.JPanel {
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
+    private javax.swing.JButton jButton6;
     private javax.swing.JComboBox jComboBox1;
     private javax.swing.JComboBox jComboBox2;
     private javax.swing.JComboBox jComboBox3;
@@ -530,8 +599,8 @@ public class FrmCuenta extends javax.swing.JPanel {
     private javax.swing.JScrollPane jScrollPane3;
     public javax.swing.JTabbedPane jTabbedPane_cuenta;
     private javax.swing.JTable jTable1;
-    private javax.swing.JTable jTable2;
     private javax.swing.JTable jTable3;
+    private javax.swing.JTable jTable_panel1_catalogo;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField jTextField3;
