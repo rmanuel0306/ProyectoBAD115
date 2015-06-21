@@ -6,8 +6,12 @@
 package com.sistcontable.formularios;
 
 import com.sistcontable.dao.CuentaDAO;
+import com.sistcontable.dao.EstadoDAO;
+import com.sistcontable.dao.RubroDAO;
 import com.sistcontable.model.Cuenta;
 import com.sistcontable.model.Estado;
+import com.sistcontable.model.Rubro;
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Vector;
@@ -24,6 +28,12 @@ import javax.swing.table.TableModel;
 public class FrmCuenta extends javax.swing.JPanel {
     Cuenta cuenta  = new Cuenta();
     CuentaDAO cuentaDAO = new CuentaDAO();
+    EstadoDAO estadoDAO = new EstadoDAO();
+    RubroDAO rubroDAO = new RubroDAO();
+    List<Cuenta> cuentaLista = cuentaDAO.searchAllCuentas();
+    List<Estado> estadoLista = estadoDAO.searchAllEstados();
+    List<Rubro> rubroLista = rubroDAO.searchAllRubros();
+    
     
     //private DefaultListModel modeloLista = new DefaultListModel();
     //private List<Usuario> objUsuario;
@@ -36,10 +46,17 @@ public class FrmCuenta extends javax.swing.JPanel {
     public FrmCuenta() {
         initComponents();
         CargarTablas();
+        CargarEstadosFinancierosEnListaDelPanel2();
+        CargarRubrosEnListaDelPanel2();
+        CargarNombresCuentasEnListaDelPanel2();
+        
+        CargarEstadosFinancierosEnListaDelPanel3();
+        CargarRubrosEnListaDelPanel3();
+        CargarNombresCuentasEnListaDelPanel3();
     }
     
     public void CargarTablas(){
-        List<Cuenta> lista =cuentaDAO.searchAllCuentas();
+
         //definiendo el modelo de la tabla--------------------------------------
         DefaultTableModel model = new DefaultTableModel();
 
@@ -51,14 +68,14 @@ public class FrmCuenta extends javax.swing.JPanel {
         model.addColumn("CUENTA MAYOR");
 
         //llenando el modelo de la tabla. agregando filas-----------------------
-        for(int i=0; i<lista.size(); i++){
-            model.addRow(new Object[]{lista.get(i).getIdCuenta().toString(),
-                lista.get(i).getEstado().getNombreEstado().toString(),
-                lista.get(i).getRubro().getNombreRubro().toString(),
-                lista.get(i).getNombreCuenta(),
-                lista.get(i).getCuentaMayor().toString()  });
+        for(int i=0; i<cuentaLista.size(); i++){
+            model.addRow(new Object[]{cuentaLista.get(i).getIdCuenta().toString(),
+                cuentaLista.get(i).getEstado().getNombreEstado().toString(),
+                cuentaLista.get(i).getRubro().getNombreRubro().toString(),
+                cuentaLista.get(i).getNombreCuenta(),
+                cuentaLista.get(i).getCuentaMayor().toString()  });
         }
-
+        
         //fin modelo de la tabla -----------------------------------------------
 
         //asignando el modelo de la tabla a la tabla de mi interfaz.
@@ -68,6 +85,70 @@ public class FrmCuenta extends javax.swing.JPanel {
     }
     
     
+    
+    public void CargarEstadosFinancierosEnListaDelPanel2(){
+               
+        for(int i=0; i<estadoLista.size() ; i++){
+        jComboBox_panel2_estadosFinancieros.addItem(
+                estadoLista.get(i).getIdEstado().toString() +
+                "- "+
+                estadoLista.get(i).getNombreEstado().toString());        
+        }
+    }
+    
+    
+    public void CargarRubrosEnListaDelPanel2(){      
+        for(int i=0; i<rubroLista.size() ; i++){
+        jComboBox_panel2_rubros.addItem(
+                rubroLista.get(i).getIdRubro().toString()+
+                "- "+
+                rubroLista.get(i).getNombreRubro().toString());        
+        }
+    }
+    
+    public void CargarNombresCuentasEnListaDelPanel2(){      
+        for(int i=0; i<cuentaLista.size() ; i++){
+        jComboBox_panel2_cuentaMayor.addItem(
+                cuentaLista.get(i).getIdCuenta().toString()+
+                "- "+
+                cuentaLista.get(i).getNombreCuenta().toString().replace('_',' '));        
+        }
+    }
+    
+    public void CargarEstadosFinancierosEnListaDelPanel3(){
+               
+        for(int i=0; i<estadoLista.size() ; i++){
+        jComboBox_panel3_estado.addItem(
+                estadoLista.get(i).getIdEstado().toString() +
+                "- "+
+                estadoLista.get(i).getNombreEstado().toString());        
+        }
+    }
+    
+    
+    public void CargarRubrosEnListaDelPanel3(){      
+        for(int i=0; i<rubroLista.size() ; i++){
+        jComboBox_panel3_rubro.addItem(
+                rubroLista.get(i).getIdRubro().toString()+
+                "- "+
+                rubroLista.get(i).getNombreRubro().toString());        
+        }
+    }
+    
+    public void CargarNombresCuentasEnListaDelPanel3(){      
+        for(int i=0; i<cuentaLista.size() ; i++){
+        jComboBox_panel3_cuentaMayor.addItem(
+                cuentaLista.get(i).getIdCuenta().toString()+
+                "- "+
+                cuentaLista.get(i).getNombreCuenta().toString().replace('_',' '));        
+        }
+    }
+    
+    public void CargarTablasEnMemoria(){
+    cuentaLista = cuentaDAO.searchAllCuentas();
+    estadoLista = estadoDAO.searchAllEstados();
+    rubroLista = rubroDAO.searchAllRubros();
+    }
     
 
     /**
@@ -88,15 +169,15 @@ public class FrmCuenta extends javax.swing.JPanel {
         jLabel2 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        jTextField_panel2_idcuenta = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
-        jComboBox2 = new javax.swing.JComboBox();
+        jComboBox_panel2_estadosFinancieros = new javax.swing.JComboBox();
         jLabel7 = new javax.swing.JLabel();
-        jComboBox3 = new javax.swing.JComboBox();
+        jComboBox_panel2_rubros = new javax.swing.JComboBox();
         jLabel8 = new javax.swing.JLabel();
-        jTextField4 = new javax.swing.JTextField();
+        jTextField_panel2_nombrecuenta = new javax.swing.JTextField();
         jLabel9 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox();
+        jComboBox_panel2_cuentaMayor = new javax.swing.JComboBox();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jPanel4 = new javax.swing.JPanel();
@@ -110,11 +191,11 @@ public class FrmCuenta extends javax.swing.JPanel {
         jLabel14 = new javax.swing.JLabel();
         jLabel15 = new javax.swing.JLabel();
         jLabel16 = new javax.swing.JLabel();
-        jTextField2 = new javax.swing.JTextField();
-        jComboBox4 = new javax.swing.JComboBox();
-        jComboBox5 = new javax.swing.JComboBox();
-        jTextField3 = new javax.swing.JTextField();
-        jComboBox6 = new javax.swing.JComboBox();
+        jTextField_panel3_idcuenta = new javax.swing.JTextField();
+        jComboBox_panel3_estado = new javax.swing.JComboBox();
+        jComboBox_panel3_rubro = new javax.swing.JComboBox();
+        jTextField_panel3_nombre = new javax.swing.JTextField();
+        jComboBox_panel3_cuentaMayor = new javax.swing.JComboBox();
         jButton3 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
         jPanel5 = new javax.swing.JPanel();
@@ -183,20 +264,20 @@ public class FrmCuenta extends javax.swing.JPanel {
         jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel6.setText("ESTADO FINANCIERO AL QUE PERTENECE:");
 
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jComboBox_panel2_estadosFinancieros.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBox_panel2_estadosFinancierosActionPerformed(evt);
+            }
+        });
 
         jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel7.setText("RUBRO:");
-
-        jComboBox3.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         jLabel8.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel8.setText("NOMBRE DE LA CUENTA:");
 
         jLabel9.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel9.setText("CUENTA PADRE:");
-
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -212,12 +293,13 @@ public class FrmCuenta extends javax.swing.JPanel {
                     .addComponent(jLabel9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jComboBox3, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(jTextField4)
-                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 373, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jTextField_panel2_nombrecuenta)
+                        .addComponent(jComboBox_panel2_cuentaMayor, javax.swing.GroupLayout.PREFERRED_SIZE, 373, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jTextField_panel2_idcuenta, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addComponent(jComboBox_panel2_rubros, javax.swing.GroupLayout.Alignment.LEADING, 0, 302, Short.MAX_VALUE)
+                        .addComponent(jComboBox_panel2_estadosFinancieros, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addContainerGap(320, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -225,28 +307,33 @@ public class FrmCuenta extends javax.swing.JPanel {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTextField_panel2_idcuenta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel5))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jComboBox_panel2_estadosFinancieros, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel6))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jComboBox3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jComboBox_panel2_rubros, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel7))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTextField_panel2_nombrecuenta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel8))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jComboBox_panel2_cuentaMayor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel9))
-                .addContainerGap(29, Short.MAX_VALUE))
+                .addContainerGap(41, Short.MAX_VALUE))
         );
 
         jButton1.setText("Ingresar");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         jButton2.setText("Cancelar");
 
@@ -273,7 +360,7 @@ public class FrmCuenta extends javax.swing.JPanel {
                 .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 109, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 97, Short.MAX_VALUE)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1)
                     .addComponent(jButton2))
@@ -287,15 +374,20 @@ public class FrmCuenta extends javax.swing.JPanel {
 
         jTable_panel3_catalogo.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {},
+                {},
+                {},
+                {}
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+
             }
         ));
+        jTable_panel3_catalogo.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTable_panel3_catalogoMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(jTable_panel3_catalogo);
 
         jLabel11.setText("Seleccione la cuenta a modificar dando clic sobre la tabla:");
@@ -317,13 +409,20 @@ public class FrmCuenta extends javax.swing.JPanel {
         jLabel16.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel16.setText("CUENTA PADRE:");
 
-        jComboBox4.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jTextField_panel3_idcuenta.setEnabled(false);
 
-        jComboBox5.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
-        jComboBox6.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jComboBox_panel3_estado.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBox_panel3_estadoActionPerformed(evt);
+            }
+        });
 
         jButton3.setText("Modificar");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
 
         jButton4.setText("Cancelar");
 
@@ -337,7 +436,7 @@ public class FrmCuenta extends javax.swing.JPanel {
                     .addGroup(jPanel6Layout.createSequentialGroup()
                         .addComponent(jLabel16, javax.swing.GroupLayout.PREFERRED_SIZE, 246, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(jComboBox6, javax.swing.GroupLayout.PREFERRED_SIZE, 318, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jComboBox_panel3_cuentaMayor, javax.swing.GroupLayout.PREFERRED_SIZE, 318, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 256, Short.MAX_VALUE)
                         .addComponent(jButton4)
                         .addGap(18, 18, 18)
@@ -348,19 +447,19 @@ public class FrmCuenta extends javax.swing.JPanel {
                                 .addGroup(jPanel6Layout.createSequentialGroup()
                                     .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 246, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addGap(18, 18, 18)
-                                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(jTextField_panel3_idcuenta, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGroup(jPanel6Layout.createSequentialGroup()
                                     .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 246, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addGap(18, 18, 18)
-                                    .addComponent(jComboBox4, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                    .addComponent(jComboBox_panel3_estado, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                                 .addGroup(jPanel6Layout.createSequentialGroup()
                                     .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 246, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addGap(18, 18, 18)
-                                    .addComponent(jComboBox5, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                                    .addComponent(jComboBox_panel3_rubro, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                             .addGroup(jPanel6Layout.createSequentialGroup()
                                 .addComponent(jLabel15, javax.swing.GroupLayout.PREFERRED_SIZE, 246, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
-                                .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 318, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(jTextField_panel3_nombre, javax.swing.GroupLayout.PREFERRED_SIZE, 318, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -370,24 +469,24 @@ public class FrmCuenta extends javax.swing.JPanel {
                 .addContainerGap()
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel12)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jTextField_panel3_idcuenta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel13)
-                    .addComponent(jComboBox4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jComboBox_panel3_estado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel14)
-                    .addComponent(jComboBox5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jComboBox_panel3_rubro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel15)
-                    .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jTextField_panel3_nombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel16)
                     .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jComboBox6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jComboBox_panel3_cuentaMayor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jButton3)
                         .addComponent(jButton4)))
                 .addContainerGap(23, Short.MAX_VALUE))
@@ -429,13 +528,13 @@ public class FrmCuenta extends javax.swing.JPanel {
 
         jTable_panel4_catalogo.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {},
+                {},
+                {},
+                {}
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+
             }
         ));
         jScrollPane3.setViewportView(jTable_panel4_catalogo);
@@ -538,6 +637,79 @@ public class FrmCuenta extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField6ActionPerformed
 
+    private void jComboBox_panel2_estadosFinancierosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox_panel2_estadosFinancierosActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jComboBox_panel2_estadosFinancierosActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+
+        Cuenta c = new Cuenta();
+        Rubro  r=new Rubro();
+        BigDecimal cMayor;
+        
+
+        c.setIdCuenta(BigDecimal.valueOf(Double.parseDouble(jTextField_panel2_idcuenta.getText())));
+  
+        int separador = jComboBox_panel2_estadosFinancieros.getSelectedItem().toString().indexOf("-");
+        String x = jComboBox_panel2_estadosFinancieros.getSelectedItem().toString().substring(0, separador);
+        c.setEstado(estadoDAO.obtenerEstadoByID(x));
+        
+        separador = jComboBox_panel2_rubros.getSelectedItem().toString().indexOf("-");
+        x = jComboBox_panel2_rubros.getSelectedItem().toString().substring(0, separador);
+        c.setRubro(rubroDAO.obtenerRubroByID(x));
+        
+        
+        c.setNombreCuenta(jTextField_panel2_nombrecuenta.getText());
+        
+        
+        separador = jComboBox_panel2_cuentaMayor.getSelectedItem().toString().indexOf("-");
+        x = jComboBox_panel2_cuentaMayor.getSelectedItem().toString().substring(0, separador);
+        c.setCuentaMayor(cuentaDAO.obtenerCuentaByID(x).getIdCuenta());
+        
+        //JOptionPane.showMessageDialog(null, c.getIdCuenta()+" "+c.getEstado().getIdEstado()+" "+c.getRubro().getIdRubro()+" "+c.getNombreCuenta()+" "+c.getCuentaMayor());
+        cuentaDAO.saveCuenta(c);
+        
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+
+        Cuenta c = new Cuenta();
+        Rubro  r=new Rubro();
+        BigDecimal cMayor;
+ 
+        c.setIdCuenta(BigDecimal.valueOf(Double.parseDouble(jTextField_panel3_idcuenta.getText())));
+  
+        int separador = jComboBox_panel3_estado.getSelectedItem().toString().indexOf("-");
+        String x = jComboBox_panel3_estado.getSelectedItem().toString().substring(0, separador);
+        c.setEstado(estadoDAO.obtenerEstadoByID(x));
+        
+        separador = jComboBox_panel3_rubro.getSelectedItem().toString().indexOf("-");
+        x = jComboBox_panel3_rubro.getSelectedItem().toString().substring(0, separador);
+        c.setRubro(rubroDAO.obtenerRubroByID(x));
+        
+        
+        c.setNombreCuenta(jTextField_panel3_nombre.getText());
+        
+        
+        separador = jComboBox_panel3_cuentaMayor.getSelectedItem().toString().indexOf("-");
+        x = jComboBox_panel3_cuentaMayor.getSelectedItem().toString().substring(0, separador);
+        c.setCuentaMayor(cuentaDAO.obtenerCuentaByID(x).getIdCuenta());
+        
+        JOptionPane.showMessageDialog(null, c.getIdCuenta()+" "+c.getEstado().getIdEstado()+" "+c.getRubro().getIdRubro()+" "+c.getNombreCuenta()+" "+c.getCuentaMayor());
+        
+    }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jTable_panel3_catalogoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable_panel3_catalogoMouseClicked
+        
+        jTextField_panel3_idcuenta.setText(jTable_panel3_catalogo.getValueAt(jTable_panel3_catalogo.getSelectedRow(), 0).toString());
+        jTextField_panel3_nombre.setText(jTable_panel3_catalogo.getValueAt(jTable_panel3_catalogo.getSelectedRow(), 3).toString());
+        
+    }//GEN-LAST:event_jTable_panel3_catalogoMouseClicked
+
+    private void jComboBox_panel3_estadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox_panel3_estadoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jComboBox_panel3_estadoActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
@@ -545,12 +717,12 @@ public class FrmCuenta extends javax.swing.JPanel {
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
-    private javax.swing.JComboBox jComboBox1;
-    private javax.swing.JComboBox jComboBox2;
-    private javax.swing.JComboBox jComboBox3;
-    private javax.swing.JComboBox jComboBox4;
-    private javax.swing.JComboBox jComboBox5;
-    private javax.swing.JComboBox jComboBox6;
+    private javax.swing.JComboBox jComboBox_panel2_cuentaMayor;
+    private javax.swing.JComboBox jComboBox_panel2_estadosFinancieros;
+    private javax.swing.JComboBox jComboBox_panel2_rubros;
+    private javax.swing.JComboBox jComboBox_panel3_cuentaMayor;
+    private javax.swing.JComboBox jComboBox_panel3_estado;
+    private javax.swing.JComboBox jComboBox_panel3_rubro;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -583,11 +755,11 @@ public class FrmCuenta extends javax.swing.JPanel {
     private javax.swing.JTable jTable_panel1_catalogo;
     private javax.swing.JTable jTable_panel3_catalogo;
     private javax.swing.JTable jTable_panel4_catalogo;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
-    private javax.swing.JTextField jTextField4;
     private javax.swing.JTextField jTextField5;
     private javax.swing.JTextField jTextField6;
+    private javax.swing.JTextField jTextField_panel2_idcuenta;
+    private javax.swing.JTextField jTextField_panel2_nombrecuenta;
+    private javax.swing.JTextField jTextField_panel3_idcuenta;
+    private javax.swing.JTextField jTextField_panel3_nombre;
     // End of variables declaration//GEN-END:variables
 }
