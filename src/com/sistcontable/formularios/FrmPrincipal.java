@@ -299,7 +299,8 @@ public class FrmPrincipal extends javax.swing.JFrame {
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
        CardLayout paletas = (CardLayout) pnlContenedor.getLayout();
         paletas.show(pnlContenedor, "Cuenta");   
-        frmCuenta.jTabbedPane_cuenta.setSelectedIndex(0);
+        //frmCuenta.jTabbedPane.setSelectedIndex(0);
+        
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     private void jMenuItem12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem12ActionPerformed
