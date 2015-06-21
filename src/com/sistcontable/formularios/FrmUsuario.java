@@ -331,7 +331,7 @@ public class FrmUsuario extends javax.swing.JPanel {
         
         labelMensaje.setText("");
         labelMensaje.setIcon(null);
-        textID.setEditable(true);
+        textID.setEditable(false);
         textNombre.setEditable(true);
         //textPersona.setEditable(true);
         listaIdPersona.setEditable(true);
@@ -346,19 +346,21 @@ public class FrmUsuario extends javax.swing.JPanel {
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
         // TODO add your handling code here:
        boolean resp = Boolean.FALSE;
-        if(textID.getText().equals("") || textNombre.getText().equals("") || listaIdPersona.getSelectedItem().toString().equals("")
+        if(textNombre.getText().equals("") || listaIdPersona.getSelectedItem().toString().equals("")
                 || textClave.getText().equals("")){
             MostrarMensaje("Uno o mas campos estan vacios","cancel.png", labelMensaje);
         }else{
-            usuario.setId_usuario(Double.parseDouble(textID.getText()));
-            usuario.setNombre_usuario(textNombre.getText());
-            usuario.setId_persona(Double.parseDouble(obtenerNumero(listaIdPersona.getSelectedItem().toString())));
-            usuario.setClave(textClave.getText());
-            
-            if(isUpdate)
-                resp=usuarioDAO.updateUser(usuario);
-            else
-                resp=usuarioDAO.saveUser(usuario);
+            if(isUpdate){
+                usuario.setId_usuario(Double.parseDouble(textID.getText()));
+                 usuario.setNombre_usuario(textNombre.getText());
+                 usuario.setId_persona(Double.parseDouble(obtenerNumero(listaIdPersona.getSelectedItem().toString())));
+                  usuario.setClave(textClave.getText());
+                resp=usuarioDAO.updateUser(usuario);}
+            else{
+                    usuario.setNombre_usuario(textNombre.getText());
+                 usuario.setId_persona(Double.parseDouble(obtenerNumero(listaIdPersona.getSelectedItem().toString())));
+                  usuario.setClave(textClave.getText());
+                resp=usuarioDAO.saveUser(usuario);}
 
             if (resp) {
                 MostrarMensaje("Usuario Registrado Corecctamente","ok.png", labelMensaje);
