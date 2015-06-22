@@ -6,7 +6,22 @@
 package com.sistcontable.formularios;
 
 import java.awt.CardLayout;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.InputStream;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JasperCompileManager;
+import net.sf.jasperreports.engine.JasperExportManager;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.engine.design.JasperDesign;
+import net.sf.jasperreports.engine.xml.JRXmlLoader;
 
 /**
  *
@@ -66,13 +81,15 @@ public class FrmPrincipal extends javax.swing.JFrame {
         itmTab1 = new javax.swing.JMenuItem();
         itmTab2 = new javax.swing.JMenuItem();
         jMenu5 = new javax.swing.JMenu();
-        jMenu7 = new javax.swing.JMenu();
-        Usuarios = new javax.swing.JMenuItem();
         jMenu8 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
         jMenuItem12 = new javax.swing.JMenuItem();
         jMenuItem13 = new javax.swing.JMenuItem();
         jMenuItem14 = new javax.swing.JMenuItem();
+        jMenu7 = new javax.swing.JMenu();
+        Usuarios = new javax.swing.JMenuItem();
+        jMenu9 = new javax.swing.JMenu();
+        Usuarios1 = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -189,23 +206,6 @@ public class FrmPrincipal extends javax.swing.JFrame {
         jMenu5.setText("Opciones");
         jMenuBar1.add(jMenu5);
 
-        jMenu7.setText("Usuario");
-        jMenu7.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenu7ActionPerformed(evt);
-            }
-        });
-
-        Usuarios.setText("Usuarios");
-        Usuarios.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                UsuariosActionPerformed(evt);
-            }
-        });
-        jMenu7.add(Usuarios);
-
-        jMenuBar1.add(jMenu7);
-
         jMenu8.setText("Cuentas");
 
         jMenuItem1.setText("Catalogo de cuentas");
@@ -241,6 +241,40 @@ public class FrmPrincipal extends javax.swing.JFrame {
         jMenu8.add(jMenuItem14);
 
         jMenuBar1.add(jMenu8);
+
+        jMenu7.setText("Usuario");
+        jMenu7.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenu7ActionPerformed(evt);
+            }
+        });
+
+        Usuarios.setText("Usuarios");
+        Usuarios.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                UsuariosActionPerformed(evt);
+            }
+        });
+        jMenu7.add(Usuarios);
+
+        jMenuBar1.add(jMenu7);
+
+        jMenu9.setText("Balance");
+        jMenu9.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenu9ActionPerformed(evt);
+            }
+        });
+
+        Usuarios1.setText("Comprobacion");
+        Usuarios1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Usuarios1ActionPerformed(evt);
+            }
+        });
+        jMenu9.add(Usuarios1);
+
+        jMenuBar1.add(jMenu9);
 
         setJMenuBar(jMenuBar1);
 
@@ -321,12 +355,51 @@ public class FrmPrincipal extends javax.swing.JFrame {
         frmCuenta.jTabbedPane_cuenta.setSelectedIndex(3);
     }//GEN-LAST:event_jMenuItem14ActionPerformed
 
+    private void Usuarios1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Usuarios1ActionPerformed
+        // TODO add your handling code here:
+        InputStream inputStream = null;
+        try {
+            inputStream = new FileInputStream ("src/prueba1.jrxml");
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(FrmPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        Map parameters = new HashMap();
+        JasperDesign jasperDesign = null;
+        try {
+            jasperDesign = JRXmlLoader.load(inputStream);
+        } catch (JRException ex) {
+            Logger.getLogger(FrmPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        JasperReport jasperReport = null;
+        try {
+            jasperReport = JasperCompileManager.compileReport(jasperDesign);
+        } catch (JRException ex) {
+            Logger.getLogger(FrmPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        JasperPrint jasperPrint = null;
+        try {
+            jasperPrint = JasperFillManager.fillReport(jasperReport, parameters);
+        } catch (JRException ex) {
+            Logger.getLogger(FrmPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        try {
+            JasperExportManager.exportReportToPdfFile(jasperPrint, "src/com.sistcontable.reportes/report1.pdf");
+        } catch (JRException ex) {
+            Logger.getLogger(FrmPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_Usuarios1ActionPerformed
+
+    private void jMenu9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenu9ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jMenu9ActionPerformed
+
     
     
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuItem Usuarios;
+    private javax.swing.JMenuItem Usuarios1;
     private javax.swing.JMenuItem itmNuevo;
     private javax.swing.JMenuItem itmTab1;
     private javax.swing.JMenuItem itmTab2;
@@ -340,6 +413,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu6;
     private javax.swing.JMenu jMenu7;
     private javax.swing.JMenu jMenu8;
+    private javax.swing.JMenu jMenu9;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem10;
