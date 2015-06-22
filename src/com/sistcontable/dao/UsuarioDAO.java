@@ -111,12 +111,11 @@ public class UsuarioDAO {
         session.beginTransaction();
         Boolean isInsert = Boolean.FALSE;        
         try{          
-            String query = "call PROC_USUARIO(:opc,'',:priv,:idpersona,:nombreusuario,:pass)";
+            String query = "call PROC_USUARIO(:opc,'',:idpersona,:nombreusuario,:pass)";
             //String query = "insert into usuario(id_usuario,id_privilegio,id_persona,nombre_usuario,clave)"
            //         + "values(:idusuario,:priv,:idpersona,:nombreusuario,:pass)";
             Query sqlQuery = session.createSQLQuery(query).addEntity(Usuario.class)
                     .setParameter("opc", 1)
-                    .setParameter("priv", 1)
                     .setParameter("idpersona", usuario.getId_persona())
                     .setParameter("nombreusuario", usuario.getNombre_usuario())
                     .setParameter("pass", usuario.getClave());
@@ -138,7 +137,7 @@ public class UsuarioDAO {
         session.beginTransaction();
         Boolean isUpdate = Boolean.FALSE;        
         try{          
-            String query = "call PROC_USUARIO(3,:id_usuario,1,:id_persona,:nombre_usuario,:clave)";
+            String query = "call PROC_USUARIO(3,:id_usuario,:id_persona,:nombre_usuario,:clave)";
             Query sqlQuery = session.createSQLQuery(query).addEntity(Usuario.class)
                     .setParameter("id_usuario", usuario.getId_usuario())
                     .setParameter("id_persona", usuario.getId_persona())
@@ -160,7 +159,7 @@ public class UsuarioDAO {
         session.beginTransaction();
         boolean isDelete = Boolean.FALSE;        
         try{          
-            String query = "call PROC_USUARIO(4,:id_usuario,'','','','')";
+            String query = "call PROC_USUARIO(4,:id_usuario,'','','')";
             Query sqlQuery = session.createSQLQuery(query).addEntity(Usuario.class)
                     .setParameter("id_usuario", Double.parseDouble(id));                    
             sqlQuery.executeUpdate();

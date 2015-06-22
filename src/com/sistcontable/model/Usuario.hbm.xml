@@ -8,9 +8,6 @@
             <column name="ID_USUARIO" length="38" />
             <generator class="assigned" />
         </id>
-        <property name="id_privilegio" type="double">
-            <column name="ID_PRIVILEGIO" length="38" />
-        </property>
         <property name="id_persona" type="double">
             <column name="ID_PERSONA" length="38" />
         </property>

@@ -12,7 +12,6 @@ import javax.persistence.Column;
 public class Usuario  implements java.io.Serializable {
 
      private double id_usuario;
-     private Double id_privilegio;
      private double id_persona;
      private String nombre_usuario;
      private String clave;
@@ -37,13 +36,6 @@ public class Usuario  implements java.io.Serializable {
         this.id_usuario = id_usuario;
     }
 
-    public Double getId_privilegio() {
-        return id_privilegio;
-    }
-
-    public void setId_privilegio(Double id_privilegio) {
-        this.id_privilegio = id_privilegio;
-    }
 
     public double getId_persona() {
         return id_persona;
