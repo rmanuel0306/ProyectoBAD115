@@ -8,9 +8,9 @@
             <column name="ID_TELEFONO" precision="22" scale="0" />
             <generator class="assigned" />
         </id>
-        <many-to-one name="persona" class="com.sistcontable.model.Persona" fetch="select">
+        <property name="Persona" type="big_decimal">
             <column name="ID_PERSONA" precision="22" scale="0" />
-        </many-to-one>
+        </property>
         <property name="telefonoFijo" type="java.lang.Integer">
             <column name="TELEFONO_FIJO" precision="8" scale="0" />
         </property>

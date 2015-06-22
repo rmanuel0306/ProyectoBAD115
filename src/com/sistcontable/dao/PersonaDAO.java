@@ -6,10 +6,12 @@
 package com.sistcontable.dao;
 
 import com.sistcontable.hibernate.util.HibernateUtil;
+import com.sistcontable.model.Municipio;
 import com.sistcontable.model.Persona;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.JOptionPane;
 import org.hibernate.Query;
 import org.hibernate.SQLQuery;
 import org.hibernate.Session;
@@ -20,14 +22,15 @@ import org.hibernate.Session;
  */
 public class PersonaDAO {
     
-    public List<Persona> searchAllPerson(){
+    public List<Persona> searchAllPersona(String opcion){
         Session session = HibernateUtil.getSessionFactory().getCurrentSession();
         session.beginTransaction();
         List<Persona> lista =new ArrayList();
         try{
-            String query = "select * from persona";
+            String query = "select * from persona where esHistorico= :opcion";
             SQLQuery sqlQuery = session.createSQLQuery(query);
-            sqlQuery.addEntity(Persona.class);
+            sqlQuery.addEntity(Persona.class)
+                    .setString("opcion", opcion);
                
             lista = sqlQuery.list();
             
@@ -41,15 +44,16 @@ public class PersonaDAO {
         return lista;
     }
     
-    public boolean savePerson(Persona persona){
+    public boolean savePersona(Persona persona){
         Session session = HibernateUtil.getSessionFactory().getCurrentSession();
         session.beginTransaction();
         Boolean isInsert = Boolean.FALSE;
         
         try{          
-            String query = "CALL savePerson(:idmuni,:priNombre,:segNombre,:priApellido,:segApellido,:cargo,:sexo,:fechNac,:dui,:email,:direccion)";
+            JOptionPane.showMessageDialog(null, persona.getIdMunicipio());
+            String query = "CALL savePersona(:idmuni,:priNombre,:segNombre,:priApellido,:segApellido,:cargo,:sexo,:fechNac,:dui,:email,:direccion,:historico)";
             Query sqlQuery = session.createSQLQuery(query).addEntity(Persona.class)
-                    .setParameter("idmuni", persona.getIdMunicipio())
+                    .setParameter("idmuni",Integer.parseInt(persona.getIdMunicipio().toString()))
                     .setParameter("priNombre", persona.getPrimerNombre())
                     .setParameter("segNombre", persona.getSegundoNombre())
                     .setParameter("priApellido", persona.getPrimerApellido())
@@ -59,7 +63,8 @@ public class PersonaDAO {
                     .setParameter("fechNac", persona.getFechaNac())
                     .setParameter("dui", persona.getDui())
                     .setParameter("email", persona.getEMail())
-                    .setParameter("direccion", persona.getDireccion());
+                    .setParameter("direccion", persona.getDireccion())
+                    .setParameter("historico", persona.getEsHistorico());
             
             sqlQuery.executeUpdate();
             isInsert = Boolean.TRUE;
@@ -73,13 +78,13 @@ public class PersonaDAO {
         return isInsert;
     }
     
-    public boolean savePerson2(){
+    public boolean savePersona2(){
         Session session = HibernateUtil.getSessionFactory().getCurrentSession();
         session.beginTransaction();
         Boolean isInsert = Boolean.FALSE;
         
         try{          
-            String query = "CALL savePerson(:idmuni,:priNombre,:segNombre,:priApellido,:segApellido,:cargo,:sexo,:fechNac,:dui,:email,:direccion)";
+            String query = "CALL savePersona(:idmuni,:priNombre,:segNombre,:priApellido,:segApellido,:cargo,:sexo,:fechNac,:dui,:email,:direccion)";
             Query sqlQuery = session.createSQLQuery(query).addEntity(Persona.class)
                     .setParameter("idmuni", null)
                     .setParameter("priNombre", "Diana")
@@ -131,7 +136,7 @@ public class PersonaDAO {
         return isUpdate;
     }*/
     
-    public boolean deletePerson(BigDecimal id){
+    public boolean deletePersona(BigDecimal id){
         Session session = HibernateUtil.getSessionFactory().getCurrentSession();
         session.beginTransaction();
         boolean isDelete = Boolean.FALSE;
@@ -151,6 +156,24 @@ public class PersonaDAO {
             session.close();
         }
         return isDelete;
+    }
+    
+    public List<Municipio> searchAllMunicipio(){
+        Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+        session.beginTransaction();
+        List<Municipio> lista =new ArrayList();
+        try{
+            String query = "select * from municipio";
+            SQLQuery sqlQuery = session.createSQLQuery(query);
+            sqlQuery.addEntity(Municipio.class);                    
+            lista = sqlQuery.list();
+        }catch (Exception e){
+            System.out.println("ERROR " + e);
+            lista = null;
+        }finally{
+            session.close();
+        }
+        return lista;
     }
     
 }

@@ -11,7 +11,7 @@ public class Telefono  implements java.io.Serializable {
 
 
      private BigDecimal idTelefono;
-     private Persona persona;
+     private BigDecimal persona;
      private Integer telefonoFijo;
      private Integer telefonoMovil;
      private Integer telefonoAuxiliar;
@@ -23,7 +23,7 @@ public class Telefono  implements java.io.Serializable {
     public Telefono(BigDecimal idTelefono) {
         this.idTelefono = idTelefono;
     }
-    public Telefono(BigDecimal idTelefono, Persona persona, Integer telefonoFijo, Integer telefonoMovil, Integer telefonoAuxiliar) {
+    public Telefono(BigDecimal idTelefono, BigDecimal persona, Integer telefonoFijo, Integer telefonoMovil, Integer telefonoAuxiliar) {
        this.idTelefono = idTelefono;
        this.persona = persona;
        this.telefonoFijo = telefonoFijo;
@@ -38,11 +38,11 @@ public class Telefono  implements java.io.Serializable {
     public void setIdTelefono(BigDecimal idTelefono) {
         this.idTelefono = idTelefono;
     }
-    public Persona getPersona() {
+    public BigDecimal getPersona() {
         return this.persona;
     }
     
-    public void setPersona(Persona persona) {
+    public void setPersona(BigDecimal persona) {
         this.persona = persona;
     }
     public Integer getTelefonoFijo() {

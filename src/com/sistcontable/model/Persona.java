@@ -15,7 +15,7 @@ public class Persona  implements java.io.Serializable {
 
      private BigDecimal idPersona;
      private Municipio municipio;
-     private int idMunicipio;
+     private BigDecimal idMunicipio;
      private String primerNombre;
      private String segundoNombre;
      private String primerApellido;
@@ -28,6 +28,7 @@ public class Persona  implements java.io.Serializable {
      private String direccion;
      private Set telefonos = new HashSet(0);
      private Set usuarios = new HashSet(0);
+     private String esHistorico;
 
     public Persona() {
     }
@@ -152,13 +153,23 @@ public class Persona  implements java.io.Serializable {
         this.usuarios = usuarios;
     }
 
-    public int getIdMunicipio() {
+    public BigDecimal getIdMunicipio() {
         return idMunicipio;
     }
 
-    public void setIdMunicipio(int idMunicipio) {
+    public void setIdMunicipio(BigDecimal idMunicipio) {
         this.idMunicipio = idMunicipio;
     }
+
+    public String getEsHistorico() {
+        return esHistorico;
+    }
+
+    public void setEsHistorico(String esHistorico) {
+        this.esHistorico = esHistorico;
+    }
+    
+    
     
     @Override
     public String toString() {
