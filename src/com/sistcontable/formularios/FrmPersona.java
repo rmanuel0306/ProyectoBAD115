@@ -6,6 +6,8 @@
 package com.sistcontable.formularios;
 
 import com.sistcontable.dao.PersonaDAO;
+import com.sistcontable.dao.TelefonoDAO;
+import com.sistcontable.model.Municipio;
 import com.sistcontable.model.Persona;
 import com.sistcontable.model.Telefono;
 import java.math.BigDecimal;
@@ -24,9 +26,13 @@ import javax.swing.JOptionPane;
 public class FrmPersona extends javax.swing.JPanel {
     Persona persona = new Persona();
     PersonaDAO personaDAO = new PersonaDAO();
+    TelefonoDAO telefonoDAO = new TelefonoDAO(); 
+    private List<Telefono> telefonoList;
+    private List<Municipio> municipioList;
     private DefaultListModel modeloLista = new DefaultListModel();
     private List<Persona> objPersona;
     private BigDecimal idActual;
+    private BigDecimal idMunicipio;
     private Boolean isUpdate = Boolean.FALSE;
 
     /**
@@ -34,7 +40,9 @@ public class FrmPersona extends javax.swing.JPanel {
      */
     public FrmPersona() {
         initComponents();
-        Actualizar_lista();
+        actualizar_lista();
+        cargarMunicipios();
+        telefonoList = telefonoDAO.searchAllTelefono();
         jList1.setModel(modeloLista);
         textPrimerNombre.setEditable(false);
         textSegundoNombre.setEditable(false);
@@ -49,15 +57,27 @@ public class FrmPersona extends javax.swing.JPanel {
         textDireccion.setEditable(false);
     }
     
-    public void Actualizar_lista() {
-        objPersona = personaDAO.searchAllPerson();
-
+    public void actualizar_lista() {
+        objPersona = personaDAO.searchAllPersona(String.valueOf(cmbOpcionMostrar.getSelectedIndex()));
+        
+        this.modeloLista.clear();
         if (!(objPersona.isEmpty())) {
-            this.modeloLista.clear();
+            
             for (int i = 0; i < objPersona.size(); i++) {
                 modeloLista.addElement(objPersona.get(i));
             }
             jList1.setSelectedIndex(0);
+        }
+    }
+    
+    public void cargarMunicipios(){
+        
+        municipioList = personaDAO.searchAllMunicipio();
+        if (!(municipioList.isEmpty())){
+            cmbMunicipio.removeAllItems();
+            for(int i=0; i<municipioList.size();i++){
+                cmbMunicipio.addItem(municipioList.get(i).getNombreMunic());
+            }            
         }
     }
 
@@ -73,6 +93,8 @@ public class FrmPersona extends javax.swing.JPanel {
         jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jList1 = new javax.swing.JList();
+        jLabel15 = new javax.swing.JLabel();
+        cmbOpcionMostrar = new javax.swing.JComboBox();
         btnEditar = new javax.swing.JButton();
         btnNuevo = new javax.swing.JButton();
         btnGuardar = new javax.swing.JButton();
@@ -94,9 +116,9 @@ public class FrmPersona extends javax.swing.JPanel {
         textSegundoNombre = new javax.swing.JTextField();
         textPrimerApellido = new javax.swing.JTextField();
         textSegundoApellido = new javax.swing.JTextField();
-        combMunicipio = new javax.swing.JComboBox();
+        cmbMunicipio = new javax.swing.JComboBox();
         textCargo = new javax.swing.JTextField();
-        combSexo = new javax.swing.JComboBox();
+        cmbSexo = new javax.swing.JComboBox();
         textDUI = new javax.swing.JTextField();
         textEmail = new javax.swing.JTextField();
         jScrollPane3 = new javax.swing.JScrollPane();
@@ -109,6 +131,8 @@ public class FrmPersona extends javax.swing.JPanel {
         textTelAuxiliar = new javax.swing.JTextField();
         labelMensaje = new javax.swing.JLabel();
         textFechNac = new com.toedter.calendar.JDateChooser();
+        checkHistorico = new javax.swing.JCheckBox();
+        jLabel16 = new javax.swing.JLabel();
 
         setPreferredSize(new java.awt.Dimension(1059, 515));
 
@@ -126,20 +150,39 @@ public class FrmPersona extends javax.swing.JPanel {
         });
         jScrollPane1.setViewportView(jList1);
 
+        jLabel15.setText("Mostrar :");
+
+        cmbOpcionMostrar.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Activos", "Historicos" }));
+        cmbOpcionMostrar.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                cmbOpcionMostrarItemStateChanged(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 208, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 208, Short.MAX_VALUE)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel15)
+                        .addGap(18, 18, 18)
+                        .addComponent(cmbOpcionMostrar, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 385, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel15)
+                    .addComponent(cmbOpcionMostrar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 360, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -200,9 +243,14 @@ public class FrmPersona extends javax.swing.JPanel {
 
         jLabel11.setText("Direccion");
 
-        combMunicipio.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cmbMunicipio.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cmbMunicipio.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                cmbMunicipioItemStateChanged(evt);
+            }
+        });
 
-        combSexo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Masculino", "Femenino" }));
+        cmbSexo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Masculino", "Femenino" }));
 
         jScrollPane3.setViewportView(textDireccion);
 
@@ -213,6 +261,8 @@ public class FrmPersona extends javax.swing.JPanel {
         jLabel14.setText("Telefono Fijo");
 
         textFechNac.setDateFormatString("dd-MM-yyyy");
+
+        jLabel16.setText("Marcar como Historico");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -234,10 +284,10 @@ public class FrmPersona extends javax.swing.JPanel {
                                     .addComponent(jLabel8)
                                     .addComponent(jLabel10)
                                     .addComponent(jLabel11))
-                                .addGap(112, 112, 112)
-                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(textEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 310, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 310, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGap(133, 133, 133)
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(textEmail)
+                                    .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 310, Short.MAX_VALUE)))
                             .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel1)
@@ -246,7 +296,8 @@ public class FrmPersona extends javax.swing.JPanel {
                                     .addComponent(jLabel4)
                                     .addComponent(jLabel9)
                                     .addComponent(jLabel5)
-                                    .addComponent(jLabel7))
+                                    .addComponent(jLabel7)
+                                    .addComponent(jLabel16))
                                 .addGap(71, 71, 71)
                                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(textSegundoApellido, javax.swing.GroupLayout.PREFERRED_SIZE, 310, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -257,16 +308,17 @@ public class FrmPersona extends javax.swing.JPanel {
                                         .addComponent(textFechNac, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                         .addComponent(textDUI, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 195, Short.MAX_VALUE)
                                         .addComponent(textCargo, javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(combMunicipio, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(cmbMunicipio, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                         .addComponent(textTelAuxiliar, javax.swing.GroupLayout.Alignment.LEADING)
                                         .addComponent(textTelMovil, javax.swing.GroupLayout.Alignment.LEADING)
                                         .addComponent(textTelFijo, javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(combSexo, javax.swing.GroupLayout.Alignment.LEADING, 0, 195, Short.MAX_VALUE)))))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                                        .addComponent(cmbSexo, javax.swing.GroupLayout.Alignment.LEADING, 0, 195, Short.MAX_VALUE))
+                                    .addComponent(checkHistorico))))
+                        .addGap(227, 227, Short.MAX_VALUE))))
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(117, 117, 117)
                 .addComponent(labelMensaje, javax.swing.GroupLayout.PREFERRED_SIZE, 519, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 108, Short.MAX_VALUE))
+                .addGap(0, 132, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -287,10 +339,14 @@ public class FrmPersona extends javax.swing.JPanel {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
                     .addComponent(textSegundoApellido, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 21, Short.MAX_VALUE)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel16)
+                    .addComponent(checkHistorico))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel9)
-                    .addComponent(combMunicipio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(cmbMunicipio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
@@ -310,7 +366,7 @@ public class FrmPersona extends javax.swing.JPanel {
                 .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
-                    .addComponent(combSexo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(cmbSexo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel7)
@@ -327,7 +383,7 @@ public class FrmPersona extends javax.swing.JPanel {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel11)
                     .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 25, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
                 .addComponent(labelMensaje, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(21, 21, 21))
         );
@@ -354,7 +410,7 @@ public class FrmPersona extends javax.swing.JPanel {
                         .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 733, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(27, Short.MAX_VALUE))))
+                        .addContainerGap(62, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -369,7 +425,7 @@ public class FrmPersona extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
-                .addContainerGap(24, Short.MAX_VALUE))
+                .addContainerGap(18, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -378,20 +434,28 @@ public class FrmPersona extends javax.swing.JPanel {
         boolean resp = Boolean.FALSE;
         if(textPrimerNombre.getText().equals("") || textPrimerApellido.getText().equals("") || textDireccion.getText().equals("")
                 || textDUI.getText().equals("")){
-            MostrarMensaje("Uno o mas campos estan vacios","cancel.png", labelMensaje);
+            mostrarMensaje("Uno o mas campos estan vacios","cancel.png", labelMensaje);
         }else{
             
             persona.setPrimerNombre(textPrimerNombre.getText());
             persona.setSegundoNombre(textSegundoNombre.getText());
             persona.setPrimerApellido(textPrimerApellido.getText());
             persona.setSegundoApellido(textSegundoApellido.getText());
-            //falta hacer consulta del municipio
-            combMunicipio.getSelectedItem();
-            persona.setIdMunicipio(1);
-            /////////////////////////////////
+            persona.setIdMunicipio(idMunicipio);
+            if(checkHistorico.isSelected())
+                persona.setEsHistorico("1");
+            else
+                persona.setEsHistorico("0");
+            
             persona.setCargo(textCargo.getText());
             
-            persona.setSexo("F");
+            if(cmbSexo.getSelectedIndex()==0){
+                persona.setSexo("M");
+            }
+            else{
+                persona.setSexo("F");
+            }
+            
             persona.setFechaNac(textFechNac.getDate());
             persona.setDui(textDUI.getText());
             persona.setEMail(textEmail.getText());
@@ -401,14 +465,14 @@ public class FrmPersona extends javax.swing.JPanel {
                 //resp=personaDAO.updatePerson(persona);
                 System.out.println("Actualizar");
             else{
-                resp=personaDAO.savePerson(persona);
+                resp=personaDAO.savePersona(persona);
             }
             if (resp) {
-                MostrarMensaje("Usuario Registrado Corecctamente","ok.png", labelMensaje);
+                mostrarMensaje("Usuario Registrado Corecctamente","ok.png", labelMensaje);
                 // mandar a guardar los telefonos si hay
-                Actualizar_lista();
+                actualizar_lista();
             } else {
-                MostrarMensaje("Error al tratar de Registrar el Usuario","cancel.png", labelMensaje);
+                mostrarMensaje("Error al tratar de Registrar el Usuario","cancel.png", labelMensaje);
             }
         }
     }//GEN-LAST:event_btnGuardarActionPerformed
@@ -462,23 +526,39 @@ public class FrmPersona extends javax.swing.JPanel {
     private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
         // TODO add your handling code here:
         boolean resp = Boolean.FALSE;
-        resp=personaDAO.deletePerson(idActual);
+        resp=personaDAO.deletePersona(idActual);
         
-        Actualizar_lista();
+        actualizar_lista();
         
         if(resp)
-            MostrarMensaje("Registro Eliminado","ok.png", labelMensaje);
+            mostrarMensaje("Registro Eliminado","ok.png", labelMensaje);
         else
-            MostrarMensaje("Error al tratar de eliminar el registro","cancel.png", labelMensaje);
+            mostrarMensaje("Error al tratar de eliminar el registro","cancel.png", labelMensaje);
     }//GEN-LAST:event_btnEliminarActionPerformed
 
+    public String obtenerNombreMunicipio(BigDecimal id){
+        String nombre ="";
+        
+        if(id != null){
+            for(int i=0; i<municipioList.size();i++){
+                if(id == municipioList.get(i).getIdMunic()){
+                    nombre = municipioList.get(i).getNombreMunic();
+                }
+            }
+        }
+        return nombre;
+    }
+    
     private void jList1ValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_jList1ValueChanged
         // TODO add your handling code here:
         int index = jList1.getSelectedIndex();
+        
 
         if (index != -1) {
 
             Persona objMostrarPersona = (Persona) modeloLista.getElementAt(index);
+            String nomMunicipio = obtenerNombreMunicipio(objMostrarPersona.getIdMunicipio());
+            
 
             idActual = objMostrarPersona.getIdPersona();
             
@@ -486,10 +566,18 @@ public class FrmPersona extends javax.swing.JPanel {
             textSegundoNombre.setText(objMostrarPersona.getSegundoNombre());
             textPrimerApellido.setText(objMostrarPersona.getPrimerApellido());
             textSegundoApellido.setText(objMostrarPersona.getSegundoApellido());
+            cmbMunicipio.setSelectedItem(nomMunicipio);
             textCargo.setText(objMostrarPersona.getCargo());
             textTelFijo.setText("");
             textTelMovil.setText("");
             textTelAuxiliar.setText("");
+            if(objMostrarPersona.getSexo().equals("M")){
+                cmbSexo.setSelectedIndex(0);
+            }
+            else{
+                cmbSexo.setSelectedIndex(1);
+            }
+            textFechNac.setDate(objMostrarPersona.getFechaNac());
             textDUI.setText(objMostrarPersona.getDui());
             textEmail.setText(objMostrarPersona.getEMail());
             textDireccion.setText(objMostrarPersona.getDireccion());
@@ -508,7 +596,21 @@ public class FrmPersona extends javax.swing.JPanel {
         textDireccion.setEditable(false);
     }//GEN-LAST:event_jList1ValueChanged
 
-    public void MostrarMensaje(String msj, String nameImagen, JLabel label) {
+    private void cmbOpcionMostrarItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cmbOpcionMostrarItemStateChanged
+        // TODO add your handling code here:
+        actualizar_lista();
+    }//GEN-LAST:event_cmbOpcionMostrarItemStateChanged
+
+    private void cmbMunicipioItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cmbMunicipioItemStateChanged
+        // TODO add your handling code here:
+        for(int i=0;i<municipioList.size();i++){
+            if(municipioList.get(i).getNombreMunic().equals(cmbMunicipio.getSelectedItem())){
+                idMunicipio = municipioList.get(i).getIdMunic();
+            }
+        }
+    }//GEN-LAST:event_cmbMunicipioItemStateChanged
+
+    public void mostrarMensaje(String msj, String nameImagen, JLabel label) {
         label.setText(msj);
         String path = "/com/sistcontable/imagenes/"+nameImagen;
         URL url = this.getClass().getResource(path); 
@@ -521,14 +623,18 @@ public class FrmPersona extends javax.swing.JPanel {
     private javax.swing.JButton btnEliminar;
     private javax.swing.JButton btnGuardar;
     private javax.swing.JButton btnNuevo;
-    private javax.swing.JComboBox combMunicipio;
-    private javax.swing.JComboBox combSexo;
+    private javax.swing.JCheckBox checkHistorico;
+    private javax.swing.JComboBox cmbMunicipio;
+    private javax.swing.JComboBox cmbOpcionMostrar;
+    private javax.swing.JComboBox cmbSexo;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel15;
+    private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
