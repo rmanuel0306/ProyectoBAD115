@@ -319,7 +319,7 @@ public class FrmUsuario extends javax.swing.JPanel {
         labelMensaje.setText("");
         labelMensaje.setIcon(null);
         textNombre.setEditable(true);
-        textID.setEditable(true);
+        textID.setEditable(false);
         textClave.setEditable(true);
      //   textPersona.setEditable(true);
         listaIdPersona.setEditable(true);
@@ -378,7 +378,7 @@ public class FrmUsuario extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(null, "Debe seleccionar un usuario para eliminar");
             return;
         }
-        textID.setEditable(true);
+        textID.setEditable(false);
         textNombre.setEditable(false);
         listaIdPersona.setEditable(false);
         textClave.setEditable(false);

@@ -27,7 +27,7 @@ public class PersonaDAO {
         session.beginTransaction();
         List<Persona> lista =new ArrayList();
         try{
-            String query = "select * from persona where esHistorico= :opcion";
+            String query = "select * from persona where es_Historico= :opcion";
             SQLQuery sqlQuery = session.createSQLQuery(query);
             sqlQuery.addEntity(Persona.class)
                     .setString("opcion", opcion);

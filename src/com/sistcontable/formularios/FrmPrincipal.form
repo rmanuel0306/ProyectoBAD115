@@ -192,12 +192,12 @@
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenu9ActionPerformed"/>
           </Events>
           <SubComponents>
-            <MenuItem class="javax.swing.JMenuItem" name="Usuarios1">
+            <MenuItem class="javax.swing.JMenuItem" name="Comprobacion">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Comprobacion"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="Usuarios1ActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="ComprobacionActionPerformed"/>
               </Events>
             </MenuItem>
           </SubComponents>
