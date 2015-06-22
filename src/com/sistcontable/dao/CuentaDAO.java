@@ -7,6 +7,7 @@ package com.sistcontable.dao;
 
 import com.sistcontable.hibernate.util.HibernateUtil;
 import com.sistcontable.model.Cuenta;
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 import org.hibernate.Query;
@@ -84,7 +85,7 @@ public class CuentaDAO {
         session.beginTransaction();
         List<Cuenta> lista =new ArrayList();
         try{
-            String query = "select * from cuenta";
+            String query = "select * from cuenta order by ID_CUENTA";
             SQLQuery sqlQuery = session.createSQLQuery(query);
             sqlQuery.addEntity(Cuenta.class);               
             lista = sqlQuery.list(); 
@@ -114,7 +115,7 @@ public class CuentaDAO {
         session.beginTransaction();
         Boolean isInsert = Boolean.FALSE;        
         try{          
-            String query = "insert into Cuenta(ID_CUENTA, ID_ESTADO, ID_RUBRO, NOMBRE_CUENTA, CUENTA_MAYOR) values(:idCuenta, :estado, :rubro, ':nombreCuenta', :cuentaMayor)";
+            String query = "call saveCuenta(:idCuenta,:estado,:rubro,:nombreCuenta,:cuentaMayor)";
             Query sqlQuery = session.createSQLQuery(query).addEntity(Cuenta.class)
                     .setParameter("idCuenta", cuenta.getIdCuenta())
                     .setParameter("estado", cuenta.getEstado())
@@ -131,7 +132,52 @@ public class CuentaDAO {
             session.close();
         }
         return isInsert;
+    }
+        
+    
+    public boolean updateCuenta(Cuenta cuenta){
+        Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+        session.beginTransaction();
+        Boolean isUpdate = Boolean.FALSE;        
+        try{          
+            String query = "call updateCuenta(:idCuenta,:estado,:rubro,:nombreCuenta,:cuentaMayor)";
+            Query sqlQuery = session.createSQLQuery(query).addEntity(Cuenta.class)
+                    .setParameter("idCuenta", cuenta.getIdCuenta())
+                    .setParameter("estado", cuenta.getEstado())
+                    .setParameter("rubro", cuenta.getRubro())
+                    .setParameter("nombreCuenta", cuenta.getNombreCuenta())
+                    .setParameter("cuentaMayor", cuenta.getCuentaMayor());
+            sqlQuery.executeUpdate();
+            System.out.println(sqlQuery.toString());
+            isUpdate = Boolean.TRUE;        
+        }catch (Exception e){
+            System.out.println("ERROR " + e);
+        }finally{
+            session.close();
+        }
+        return isUpdate;
     }    
     
+    
+    public boolean deleteCuenta(BigDecimal idcuenta){
+        Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+        session.beginTransaction();
+        Boolean isUpdate = Boolean.FALSE;        
+        try{          
+            String query = "call deleteCuenta(:idCuenta)";
+            Query sqlQuery = session.createSQLQuery(query).addEntity(Cuenta.class)
+                    .setParameter("idCuenta", idcuenta);
+            sqlQuery.executeUpdate();
+            System.out.println(sqlQuery.toString());
+            isUpdate = Boolean.TRUE;        
+        }catch (Exception e){
+            System.out.println("ERROR " + e);
+        }finally{
+            session.close();
+        }
+        return isUpdate;
+    }    
+        
+        
     
 }
