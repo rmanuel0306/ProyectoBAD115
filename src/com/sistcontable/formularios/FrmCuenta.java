@@ -45,6 +45,10 @@ public class FrmCuenta extends javax.swing.JPanel {
      */
     public FrmCuenta() {
         initComponents();
+        cargarTodosLosDatos();
+    }
+    
+    public void cargarTodosLosDatos(){
         CargarTablas();
         CargarEstadosFinancierosEnListaDelPanel2();
         CargarRubrosEnListaDelPanel2();
@@ -53,6 +57,8 @@ public class FrmCuenta extends javax.swing.JPanel {
         CargarEstadosFinancierosEnListaDelPanel3();
         CargarRubrosEnListaDelPanel3();
         CargarNombresCuentasEnListaDelPanel3();
+        this.repaint();
+        
     }
     
     public void CargarTablas(){
@@ -179,7 +185,6 @@ public class FrmCuenta extends javax.swing.JPanel {
         jLabel9 = new javax.swing.JLabel();
         jComboBox_panel2_cuentaMayor = new javax.swing.JComboBox();
         jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
         jPanel4 = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -197,15 +202,14 @@ public class FrmCuenta extends javax.swing.JPanel {
         jTextField_panel3_nombre = new javax.swing.JTextField();
         jComboBox_panel3_cuentaMayor = new javax.swing.JComboBox();
         jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
         jPanel5 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
         jLabel17 = new javax.swing.JLabel();
         jScrollPane3 = new javax.swing.JScrollPane();
         jTable_panel4_catalogo = new javax.swing.JTable();
         jPanel7 = new javax.swing.JPanel();
-        jTextField5 = new javax.swing.JTextField();
-        jTextField6 = new javax.swing.JTextField();
+        jTextField_panel4_idcuenta = new javax.swing.JTextField();
+        jTextField_panel4_nombre = new javax.swing.JTextField();
         jLabel10 = new javax.swing.JLabel();
         jLabel18 = new javax.swing.JLabel();
         jButton5 = new javax.swing.JButton();
@@ -246,7 +250,7 @@ public class FrmCuenta extends javax.swing.JPanel {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 10, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 14, Short.MAX_VALUE)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(16, 16, 16))
         );
@@ -328,14 +332,13 @@ public class FrmCuenta extends javax.swing.JPanel {
                 .addContainerGap(41, Short.MAX_VALUE))
         );
 
+        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/sistcontable/imagenes/filesave.png"))); // NOI18N
         jButton1.setText("Ingresar");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
             }
         });
-
-        jButton2.setText("Cancelar");
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -348,8 +351,6 @@ public class FrmCuenta extends javax.swing.JPanel {
                     .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jButton2)
-                        .addGap(18, 18, 18)
                         .addComponent(jButton1)))
                 .addContainerGap())
         );
@@ -360,10 +361,8 @@ public class FrmCuenta extends javax.swing.JPanel {
                 .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 97, Short.MAX_VALUE)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
-                    .addComponent(jButton2))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 85, Short.MAX_VALUE)
+                .addComponent(jButton1)
                 .addContainerGap())
         );
 
@@ -371,6 +370,8 @@ public class FrmCuenta extends javax.swing.JPanel {
 
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel4.setText("MODIFICAR CUENTA EXISTENTE");
+
+        jScrollPane1.setEnabled(false);
 
         jTable_panel3_catalogo.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -417,14 +418,13 @@ public class FrmCuenta extends javax.swing.JPanel {
             }
         });
 
+        jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/sistcontable/imagenes/editar.png"))); // NOI18N
         jButton3.setText("Modificar");
         jButton3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton3ActionPerformed(evt);
             }
         });
-
-        jButton4.setText("Cancelar");
 
         javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
         jPanel6.setLayout(jPanel6Layout);
@@ -437,9 +437,7 @@ public class FrmCuenta extends javax.swing.JPanel {
                         .addComponent(jLabel16, javax.swing.GroupLayout.PREFERRED_SIZE, 246, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(jComboBox_panel3_cuentaMayor, javax.swing.GroupLayout.PREFERRED_SIZE, 318, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 256, Short.MAX_VALUE)
-                        .addComponent(jButton4)
-                        .addGap(18, 18, 18)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 317, Short.MAX_VALUE)
                         .addComponent(jButton3))
                     .addGroup(jPanel6Layout.createSequentialGroup()
                         .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -484,12 +482,11 @@ public class FrmCuenta extends javax.swing.JPanel {
                     .addComponent(jTextField_panel3_nombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel16)
                     .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jComboBox_panel3_cuentaMayor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jButton3)
-                        .addComponent(jButton4)))
-                .addContainerGap(23, Short.MAX_VALUE))
+                        .addComponent(jLabel16)
+                        .addComponent(jComboBox_panel3_cuentaMayor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jButton3))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
@@ -537,13 +534,22 @@ public class FrmCuenta extends javax.swing.JPanel {
 
             }
         ));
+        jTable_panel4_catalogo.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTable_panel4_catalogoMouseClicked(evt);
+            }
+        });
         jScrollPane3.setViewportView(jTable_panel4_catalogo);
 
         jPanel7.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
-        jTextField6.addActionListener(new java.awt.event.ActionListener() {
+        jTextField_panel4_idcuenta.setEnabled(false);
+
+        jTextField_panel4_nombre.setDisabledTextColor(new java.awt.Color(204, 204, 204));
+        jTextField_panel4_nombre.setEnabled(false);
+        jTextField_panel4_nombre.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField6ActionPerformed(evt);
+                jTextField_panel4_nombreActionPerformed(evt);
             }
         });
 
@@ -553,7 +559,13 @@ public class FrmCuenta extends javax.swing.JPanel {
         jLabel18.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel18.setText("NOMBRE DE LA CUENTA:");
 
+        jButton5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/sistcontable/imagenes/delete.png"))); // NOI18N
         jButton5.setText("Eliminar");
+        jButton5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton5ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
         jPanel7.setLayout(jPanel7Layout);
@@ -566,8 +578,8 @@ public class FrmCuenta extends javax.swing.JPanel {
                     .addComponent(jLabel18, javax.swing.GroupLayout.PREFERRED_SIZE, 222, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, 353, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jTextField_panel4_idcuenta, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTextField_panel4_nombre, javax.swing.GroupLayout.PREFERRED_SIZE, 353, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(427, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel7Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -579,13 +591,13 @@ public class FrmCuenta extends javax.swing.JPanel {
             .addGroup(jPanel7Layout.createSequentialGroup()
                 .addGap(26, 26, 26)
                 .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTextField_panel4_idcuenta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel10))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTextField_panel4_nombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel18))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 42, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 30, Short.MAX_VALUE)
                 .addComponent(jButton5)
                 .addContainerGap())
         );
@@ -633,9 +645,9 @@ public class FrmCuenta extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jTextField6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField6ActionPerformed
+    private void jTextField_panel4_nombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField_panel4_nombreActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField6ActionPerformed
+    }//GEN-LAST:event_jTextField_panel4_nombreActionPerformed
 
     private void jComboBox_panel2_estadosFinancierosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox_panel2_estadosFinancierosActionPerformed
         // TODO add your handling code here:
@@ -668,6 +680,15 @@ public class FrmCuenta extends javax.swing.JPanel {
         
         //JOptionPane.showMessageDialog(null, c.getIdCuenta()+" "+c.getEstado().getIdEstado()+" "+c.getRubro().getIdRubro()+" "+c.getNombreCuenta()+" "+c.getCuentaMayor());
         cuentaDAO.saveCuenta(c);
+        if(cuentaDAO.saveCuenta(c)){
+                JOptionPane.showMessageDialog(null, "cuenta guardada correctamente.");
+                CargarTablasEnMemoria();
+                cargarTodosLosDatos();
+        }
+        else{
+                JOptionPane.showMessageDialog(null, "cuenta guardada.");
+                cargarTodosLosDatos();
+        }
         
     }//GEN-LAST:event_jButton1ActionPerformed
 
@@ -696,7 +717,13 @@ public class FrmCuenta extends javax.swing.JPanel {
         c.setCuentaMayor(cuentaDAO.obtenerCuentaByID(x).getIdCuenta());
         
         JOptionPane.showMessageDialog(null, c.getIdCuenta()+" "+c.getEstado().getIdEstado()+" "+c.getRubro().getIdRubro()+" "+c.getNombreCuenta()+" "+c.getCuentaMayor());
-        
+        if(cuentaDAO.updateCuenta(c)){
+                JOptionPane.showMessageDialog(null, "cuenta actualizada correctamente.");
+                CargarTablasEnMemoria();
+                cargarTodosLosDatos();
+        }
+        else
+                JOptionPane.showMessageDialog(null, "cuenta no se pudo actualizar.");
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jTable_panel3_catalogoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable_panel3_catalogoMouseClicked
@@ -710,12 +737,30 @@ public class FrmCuenta extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_jComboBox_panel3_estadoActionPerformed
 
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+      
+        if(cuentaDAO.deleteCuenta(BigDecimal.valueOf(Double.parseDouble(jTextField_panel4_idcuenta.getText())))){
+                JOptionPane.showMessageDialog(null, "cuenta borrada correctamente.");
+                CargarTablasEnMemoria();
+                cargarTodosLosDatos();
+        }
+        else
+                JOptionPane.showMessageDialog(null, "cuenta no se puede borrar \n Revise que no se este ocupando en ninguna transaccion.");
+        
+        
+    }//GEN-LAST:event_jButton5ActionPerformed
+
+    private void jTable_panel4_catalogoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable_panel4_catalogoMouseClicked
+        
+           jTextField_panel4_idcuenta.setText(jTable_panel4_catalogo.getValueAt(jTable_panel4_catalogo.getSelectedRow(), 0).toString());
+           jTextField_panel4_nombre.setText(jTable_panel4_catalogo.getValueAt(jTable_panel4_catalogo.getSelectedRow(), 3).toString());
+        
+    }//GEN-LAST:event_jTable_panel4_catalogoMouseClicked
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
     private javax.swing.JComboBox jComboBox_panel2_cuentaMayor;
     private javax.swing.JComboBox jComboBox_panel2_estadosFinancieros;
@@ -755,11 +800,11 @@ public class FrmCuenta extends javax.swing.JPanel {
     private javax.swing.JTable jTable_panel1_catalogo;
     private javax.swing.JTable jTable_panel3_catalogo;
     private javax.swing.JTable jTable_panel4_catalogo;
-    private javax.swing.JTextField jTextField5;
-    private javax.swing.JTextField jTextField6;
     private javax.swing.JTextField jTextField_panel2_idcuenta;
     private javax.swing.JTextField jTextField_panel2_nombrecuenta;
     private javax.swing.JTextField jTextField_panel3_idcuenta;
     private javax.swing.JTextField jTextField_panel3_nombre;
+    private javax.swing.JTextField jTextField_panel4_idcuenta;
+    private javax.swing.JTextField jTextField_panel4_nombre;
     // End of variables declaration//GEN-END:variables
 }
