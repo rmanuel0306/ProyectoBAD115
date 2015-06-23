@@ -33,6 +33,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
     FrmTab2 frmTab2 = new FrmTab2();
     FrmUsuario frmUser = new FrmUsuario();
     FrmCuenta frmCuenta = new FrmCuenta();
+    FrmTransaccion frmTransaccion = new FrmTransaccion();
     
     
 
@@ -46,6 +47,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
         pnlContenedor.add(frmTab2, "Tab2");
         pnlContenedor.add(frmUser, "Usuario");
         pnlContenedor.add(frmCuenta, "Cuenta");
+        pnlContenedor.add(frmTransaccion, "Transaccion");
     }
 
     /**
@@ -304,7 +306,8 @@ public class FrmPrincipal extends javax.swing.JFrame {
 
     private void itmNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itmNuevoActionPerformed
         // TODO add your handling code here:
-        JOptionPane.showMessageDialog(null, "Ha seleccionado la opcion Nuevo");
+        CardLayout paletas = (CardLayout) pnlContenedor.getLayout();
+        paletas.show(pnlContenedor, "Transaccion");
     }//GEN-LAST:event_itmNuevoActionPerformed
 
     private void itmTab1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itmTab1ActionPerformed
