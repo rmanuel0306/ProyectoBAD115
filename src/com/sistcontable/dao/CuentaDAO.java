@@ -115,7 +115,7 @@ public class CuentaDAO {
         session.beginTransaction();
         Boolean isInsert = Boolean.FALSE;        
         try{          
-            String query = "call saveCuenta(:idCuenta,:estado,:rubro,:nombreCuenta,:cuentaMayor)";
+            String query = "call proc_guardarCuenta(:idCuenta,:estado,:rubro,:nombreCuenta,:cuentaMayor)";
             Query sqlQuery = session.createSQLQuery(query).addEntity(Cuenta.class)
                     .setParameter("idCuenta", cuenta.getIdCuenta())
                     .setParameter("estado", cuenta.getEstado())
@@ -140,7 +140,7 @@ public class CuentaDAO {
         session.beginTransaction();
         Boolean isUpdate = Boolean.FALSE;        
         try{          
-            String query = "call updateCuenta(:idCuenta,:estado,:rubro,:nombreCuenta,:cuentaMayor)";
+            String query = "call proc_actualizarCuenta(:idCuenta,:estado,:rubro,:nombreCuenta,:cuentaMayor)";
             Query sqlQuery = session.createSQLQuery(query).addEntity(Cuenta.class)
                     .setParameter("idCuenta", cuenta.getIdCuenta())
                     .setParameter("estado", cuenta.getEstado())
@@ -164,7 +164,7 @@ public class CuentaDAO {
         session.beginTransaction();
         Boolean isUpdate = Boolean.FALSE;        
         try{          
-            String query = "call deleteCuenta(:idCuenta)";
+            String query = "call proc_borrarCuenta(:idCuenta)";
             Query sqlQuery = session.createSQLQuery(query).addEntity(Cuenta.class)
                     .setParameter("idCuenta", idcuenta);
             sqlQuery.executeUpdate();
