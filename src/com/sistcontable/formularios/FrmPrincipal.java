@@ -14,14 +14,6 @@ import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
-import net.sf.jasperreports.engine.JRException;
-import net.sf.jasperreports.engine.JasperCompileManager;
-import net.sf.jasperreports.engine.JasperExportManager;
-import net.sf.jasperreports.engine.JasperFillManager;
-import net.sf.jasperreports.engine.JasperPrint;
-import net.sf.jasperreports.engine.JasperReport;
-import net.sf.jasperreports.engine.design.JasperDesign;
-import net.sf.jasperreports.engine.xml.JRXmlLoader;
 
 /**
  *
@@ -91,7 +83,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
         jMenu7 = new javax.swing.JMenu();
         Usuarios = new javax.swing.JMenuItem();
         jMenu9 = new javax.swing.JMenu();
-        Usuarios1 = new javax.swing.JMenuItem();
+        Comprobacion = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -268,13 +260,13 @@ public class FrmPrincipal extends javax.swing.JFrame {
             }
         });
 
-        Usuarios1.setText("Comprobacion");
-        Usuarios1.addActionListener(new java.awt.event.ActionListener() {
+        Comprobacion.setText("Comprobacion");
+        Comprobacion.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                Usuarios1ActionPerformed(evt);
+                ComprobacionActionPerformed(evt);
             }
         });
-        jMenu9.add(Usuarios1);
+        jMenu9.add(Comprobacion);
 
         jMenuBar1.add(jMenu9);
 
@@ -358,39 +350,12 @@ public class FrmPrincipal extends javax.swing.JFrame {
         frmCuenta.jTabbedPane_cuenta.setSelectedIndex(3);
     }//GEN-LAST:event_jMenuItem14ActionPerformed
 
-    private void Usuarios1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Usuarios1ActionPerformed
+    private void ComprobacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ComprobacionActionPerformed
         // TODO add your handling code here:
-        InputStream inputStream = null;
-        try {
-            inputStream = new FileInputStream ("src/prueba1.jrxml");
-        } catch (FileNotFoundException ex) {
-            Logger.getLogger(FrmPrincipal.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        Map parameters = new HashMap();
-        JasperDesign jasperDesign = null;
-        try {
-            jasperDesign = JRXmlLoader.load(inputStream);
-        } catch (JRException ex) {
-            Logger.getLogger(FrmPrincipal.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        JasperReport jasperReport = null;
-        try {
-            jasperReport = JasperCompileManager.compileReport(jasperDesign);
-        } catch (JRException ex) {
-            Logger.getLogger(FrmPrincipal.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        JasperPrint jasperPrint = null;
-        try {
-            jasperPrint = JasperFillManager.fillReport(jasperReport, parameters);
-        } catch (JRException ex) {
-            Logger.getLogger(FrmPrincipal.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        try {
-            JasperExportManager.exportReportToPdfFile(jasperPrint, "src/com.sistcontable.reportes/report1.pdf");
-        } catch (JRException ex) {
-            Logger.getLogger(FrmPrincipal.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }//GEN-LAST:event_Usuarios1ActionPerformed
+       
+        
+        
+    }//GEN-LAST:event_ComprobacionActionPerformed
 
     private void jMenu9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenu9ActionPerformed
         // TODO add your handling code here:
@@ -401,8 +366,8 @@ public class FrmPrincipal extends javax.swing.JFrame {
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JMenuItem Comprobacion;
     private javax.swing.JMenuItem Usuarios;
-    private javax.swing.JMenuItem Usuarios1;
     private javax.swing.JMenuItem itmNuevo;
     private javax.swing.JMenuItem itmTab1;
     private javax.swing.JMenuItem itmTab2;
